@@ -60,6 +60,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
+
+            implementation(libs.pepper.bdd.reports.api)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
