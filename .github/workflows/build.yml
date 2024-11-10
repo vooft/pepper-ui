@@ -26,10 +26,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Pull docker images
-        run: |
-          docker pull postgres:16-alpine
-
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
