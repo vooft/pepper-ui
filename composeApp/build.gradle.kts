@@ -49,6 +49,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.cio)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -65,11 +66,19 @@ kotlin {
             implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.navigation.compose)
 
+            implementation(libs.koin.compose.viewmodel.navigation)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
             implementation(libs.pepper.bdd.reports.api)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.cio)
         }
     }
 }
