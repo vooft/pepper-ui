@@ -2,7 +2,7 @@ package io.github.vooft.pepper.suite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.vooft.pepper.http.PepperReportClient
+import io.github.vooft.pepper.http.PepperReportRepository
 import io.github.vooft.pepper.http.PepperRoot
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.reports.api.PepperTestSuite
@@ -10,21 +10,21 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class PepperSuiteViewModel(private val client: PepperReportClient) : ViewModel() {
+class PepperSuiteViewModel(private val repository: PepperReportRepository) : ViewModel() {
     private val _state = MutableStateFlow<ModelState>(ModelState.Empty)
     val state = _state.asStateFlow()
 
     fun loadRoot() {
         viewModelScope.launch {
             _state.value = ModelState.Loading
-            _state.value = ModelState.RootLoaded(client.loadRoot())
+            _state.value = ModelState.RootLoaded(repository.loadRoot())
         }
     }
 
     fun loadSuite(suiteItem: PepperRoot.PepperSuiteItem) {
         viewModelScope.launch {
             _state.value = ModelState.Loading
-            _state.value = ModelState.SuiteLoaded(suiteItem, client.loadSuite(suiteItem.path))
+            _state.value = ModelState.SuiteLoaded(suiteItem, repository.loadSuite(suiteItem.path))
         }
     }
 
@@ -32,7 +32,7 @@ class PepperSuiteViewModel(private val client: PepperReportClient) : ViewModel()
         viewModelScope.launch {
             _state.value = ModelState.Loading
             val scenarios = suite.scenarios.map {
-                client.loadScenario(suiteItem.path, it)
+                repository.loadScenario(suiteItem.path, it)
             }
 
             _state.value = ModelState.ScenariosLoaded(suite, scenarios)

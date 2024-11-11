@@ -1,6 +1,7 @@
 package io.github.vooft.pepper.configuration
 
-import io.github.vooft.pepper.http.PepperReportClient
+import io.github.vooft.pepper.http.PepperReportRepository
+import io.github.vooft.pepper.http.ResourcePepperReportRepository
 import io.github.vooft.pepper.suite.PepperSuiteViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -32,7 +33,8 @@ fun KoinApplication.koinConfiguration() {
                     }
                 }
             }
-            single { PepperReportClient(baseUrl = "https://vooft.github.io/pepper-bdd", client = get()) }
+//            single<PepperReportRepositoru> { HttpPepperReportRepository(baseUrl = "https://vooft.github.io/pepper-bdd", client = get()) }
+            single<PepperReportRepository> { ResourcePepperReportRepository() }
         },
 
         module {
