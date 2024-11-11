@@ -1,5 +1,6 @@
 package io.github.vooft.pepper.suiteitem
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
@@ -12,10 +13,19 @@ import io.github.vooft.pepper.reports.api.PepperScenarioStatus
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 
 @Composable
-fun PepperTestScenarioListItem(modifier: Modifier = Modifier, scenario: PepperTestScenario) {
-    Card(
+fun PepperTestScenarioListItem(modifier: Modifier = Modifier, scenario: PepperTestScenario, onClicked: () -> Unit = {}) {
+    ScenarioListItemContainer(
+        modifier = modifier.clickable { onClicked() },
         backgroundColor = scenario.status.color,
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        scenario = scenario
+    )
+}
+
+@Composable
+fun ScenarioListItemContainer(modifier: Modifier = Modifier, backgroundColor: Color, scenario: PepperTestScenario) {
+    Card(
+        backgroundColor = backgroundColor,
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp).clickable {  }
     ) {
         ScenarioListItemContent(scenario = scenario)
     }

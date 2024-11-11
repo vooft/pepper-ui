@@ -7,11 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.suiteitem.PepperTestScenarioList
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun PepperSuiteScreen(viewModel: PepperSuiteViewModel = koinViewModel()) {
+fun PepperSuitesListScreen(viewModel: PepperSuiteViewModel = koinViewModel(), onScenarioClicked: (PepperTestScenario) -> Unit = {}) {
     val viewModelState by viewModel.state.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -38,7 +39,11 @@ fun PepperSuiteScreen(viewModel: PepperSuiteViewModel = koinViewModel()) {
             }
 
             is PepperSuiteViewModel.ModelState.ScenariosLoaded -> {
-                PepperTestScenarioList(modifier = Modifier.fillMaxSize(), scenarios = state.scenarios)
+                PepperTestScenarioList(
+                    modifier = Modifier.fillMaxSize(),
+                    scenarios = state.scenarios,
+                    onScenarioClicked = onScenarioClicked
+                )
             }
         }
     }
