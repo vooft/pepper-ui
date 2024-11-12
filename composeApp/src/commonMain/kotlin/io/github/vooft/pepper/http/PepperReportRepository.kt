@@ -1,6 +1,8 @@
 package io.github.vooft.pepper.http
 
+import io.github.vooft.pepper.reports.api.PepperScenarioStatus
 import io.github.vooft.pepper.reports.api.PepperTestScenario
+import io.github.vooft.pepper.reports.api.PepperTestStep
 import io.github.vooft.pepper.reports.api.PepperTestSuite
 import kotlinx.serialization.Serializable
 
@@ -21,4 +23,9 @@ data class PepperRoot(
         val name: String,
         val path: String
     )
+}
+
+val PepperTestStep.status get() = when (error) {
+    null -> PepperScenarioStatus.PASSED
+    else -> PepperScenarioStatus.FAILED
 }
