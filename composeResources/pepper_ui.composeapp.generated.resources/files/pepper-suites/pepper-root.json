@@ -1,0 +1,8 @@
+{
+  "suites": [
+    {
+      "name": "Sample",
+      "path": "sample-report"
+    }
+  ]
+}
