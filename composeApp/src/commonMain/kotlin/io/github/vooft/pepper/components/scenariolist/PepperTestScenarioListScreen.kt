@@ -1,4 +1,4 @@
-package io.github.vooft.pepper.suite
+package io.github.vooft.pepper.components.scenariolist
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,38 +7,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import io.github.vooft.pepper.http.PepperRoot
 import io.github.vooft.pepper.reports.api.PepperTestScenario
-import io.github.vooft.pepper.suiteitem.PepperTestScenarioList
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun PepperSuitesListScreen(viewModel: PepperSuiteViewModel = koinViewModel(), onScenarioClicked: (PepperTestScenario) -> Unit = {}) {
+fun PepperTestScenarioListScreen(
+    suiteItem: PepperRoot.PepperSuiteItem,
+    modifier: Modifier = Modifier,
+    viewModel: PepperTestScenarioListViewModel = koinViewModel(),
+    onScenarioClicked: (PepperTestScenario) -> Unit = {}
+) {
     val viewModelState by viewModel.state.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = modifier) {
         when (val state = viewModelState) {
-            PepperSuiteViewModel.ModelState.Empty -> {
-                viewModel.loadRoot()
+            PepperTestScenarioListViewModel.ModelState.Empty -> {
+                viewModel.loadSuite(suiteItem)
             }
 
-            PepperSuiteViewModel.ModelState.Loading -> {
+            PepperTestScenarioListViewModel.ModelState.Loading -> {
                 Text("Loading...")
             }
 
-            is PepperSuiteViewModel.ModelState.RootLoaded -> {
-                val first = state.root.suites.firstOrNull()
-                if (first == null) {
-                    Text("No suites found")
-                } else {
-                    viewModel.loadSuite(first)
-                }
-            }
-
-            is PepperSuiteViewModel.ModelState.SuiteLoaded -> {
+            is PepperTestScenarioListViewModel.ModelState.SuiteLoaded -> {
                 viewModel.loadScenarios(state.suiteItem, state.suite)
             }
 
-            is PepperSuiteViewModel.ModelState.ScenariosLoaded -> {
+            is PepperTestScenarioListViewModel.ModelState.ScenariosLoaded -> {
                 PepperTestScenarioList(
                     modifier = Modifier.fillMaxSize(),
                     scenarios = state.scenarios,

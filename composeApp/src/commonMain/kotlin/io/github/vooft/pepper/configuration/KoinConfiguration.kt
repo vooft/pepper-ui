@@ -1,8 +1,8 @@
 package io.github.vooft.pepper.configuration
 
+import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioListViewModel
 import io.github.vooft.pepper.http.PepperReportRepository
 import io.github.vooft.pepper.http.ResourcePepperReportRepository
-import io.github.vooft.pepper.suite.PepperSuiteViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
@@ -38,7 +38,7 @@ fun KoinApplication.koinConfiguration() {
         },
 
         module {
-            viewModel { PepperSuiteViewModel(get()) }
+            viewModel { PepperTestScenarioListViewModel(get()) }
         }
     )
 }
