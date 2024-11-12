@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioListScreen
+import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
 import io.github.vooft.pepper.http.PepperRoot
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 
@@ -32,6 +33,10 @@ fun SingleSuiteScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun SingleSuiteScreenRightPane(modifier: Modifier = Modifier, scenario: PepperTestScenario?) {
     Box(modifier = modifier) {
-        Text("Selected scenario: ${scenario?.name ?: "none"}")
+        if (scenario == null) {
+            Text("Select scenario")
+        } else {
+            SingleScenarioScreen(modifier = Modifier.fillMaxSize(), scenario = scenario)
+        }
     }
 }
