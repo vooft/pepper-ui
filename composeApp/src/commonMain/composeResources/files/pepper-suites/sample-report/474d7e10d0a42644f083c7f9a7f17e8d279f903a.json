@@ -5,8 +5,10 @@
   "name": "multiply by two: example 1",
   "steps": [
     {
-      "id": "c07f5d4f6300aeb916d9010b2f7682cfa18f4dbb",
-      "name": "1. Given: multiply 1 by two",
+      "id": "17cfb7ebe29e085fc0fa8a19fe6b6a600a8e2a3e",
+      "prefix": "GIVEN",
+      "index": 0,
+      "name": "multiply 1 by two",
       "arguments": [
         {
           "name": "number",
@@ -16,12 +18,14 @@
       ],
       "result": "2",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.276780Z",
-      "finishedAt": "2024-11-11T18:07:20.292143Z"
+      "startedAt": "2024-11-13T10:22:16.201263Z",
+      "finishedAt": "2024-11-13T10:22:16.223353Z"
     },
     {
-      "id": "3b6a924908531f7c8ccd1e2090f87cbf8ae6fbae",
-      "name": "2. When: two ints are compared",
+      "id": "2bd00bbc5fbde7cd2318212f33b33d8f3c24e6c5",
+      "prefix": "WHEN",
+      "index": 1,
+      "name": "two ints are compared",
       "arguments": [
         {
           "name": "first",
@@ -36,12 +40,14 @@
       ],
       "result": "CompareResult(first=2, second=2, result=true)",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.295709Z",
-      "finishedAt": "2024-11-11T18:07:20.301970Z"
+      "startedAt": "2024-11-13T10:22:16.227705Z",
+      "finishedAt": "2024-11-13T10:22:16.234880Z"
     },
     {
-      "id": "799e661a89588263e6de7ffa6f41dc79899516fb",
-      "name": "3. Then: compare result is 'true'",
+      "id": "cad1741ef3a803f805e3be72a50621effb24d3d7",
+      "prefix": "THEN",
+      "index": 2,
+      "name": "compare result is 'true'",
       "arguments": [
         {
           "name": "compareResult",
@@ -56,11 +62,10 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.302485Z",
-      "finishedAt": "2024-11-11T18:07:20.305391Z"
+      "startedAt": "2024-11-13T10:22:16.235369Z",
+      "finishedAt": "2024-11-13T10:22:16.238685Z"
     }
   ],
-  "status": "PASSED",
-  "startedAt": "2024-11-11T18:07:20.274039Z",
-  "finishedAt": "2024-11-11T18:07:20.305808Z"
+  "startedAt": "2024-11-13T10:22:16.198026Z",
+  "finishedAt": "2024-11-13T10:22:16.239314Z"
 }

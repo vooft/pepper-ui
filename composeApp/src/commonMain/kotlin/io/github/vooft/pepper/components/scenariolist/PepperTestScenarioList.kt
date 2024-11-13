@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.reports.api.PepperScenarioStatus
 import io.github.vooft.pepper.reports.api.PepperTestScenario
+import io.github.vooft.pepper.reports.api.status
 
 @Composable
 fun PepperTestScenarioList(
