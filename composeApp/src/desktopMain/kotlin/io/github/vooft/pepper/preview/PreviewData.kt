@@ -1,6 +1,6 @@
 package io.github.vooft.pepper.preview
 
-import io.github.vooft.pepper.reports.api.PepperScenarioStatus
+import io.github.vooft.pepper.reports.api.PepperStepPrefix
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.reports.api.PepperTestStep
 import kotlinx.atomicfu.atomic
@@ -15,12 +15,13 @@ object PreviewData {
         name = "Test scenario ${counter.incrementAndGet()}",
         className = "io.github.vooft.pepper.TestScenario",
         version = 1,
-        status = PepperScenarioStatus.PASSED,
         startedAt = Clock.System.now().minus(20.seconds),
         finishedAt = Clock.System.now(),
         steps = listOf(
             PepperTestStep(
                 id = "${counter.incrementAndGet()}",
+                index = 0,
+                prefix = PepperStepPrefix.GIVEN,
                 name = "Step ${counter.incrementAndGet()}",
                 result = "bla ${counter.incrementAndGet()}",
                 error = null,

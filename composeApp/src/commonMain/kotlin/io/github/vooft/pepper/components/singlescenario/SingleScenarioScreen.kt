@@ -40,10 +40,10 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import io.github.vooft.pepper.http.status
 import io.github.vooft.pepper.reports.api.PepperScenarioStatus
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.reports.api.PepperTestStep
+import io.github.vooft.pepper.reports.api.status
 
 @Composable
 fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScenario) {
@@ -145,7 +145,7 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
         if (error != null) {
             Text(
                 modifier = Modifier.padding(8.dp),
-                text = error,
+                text = error.message,
                 fontFamily = FontFamily.Monospace
             )
         }

@@ -5,8 +5,10 @@
   "name": "Nested steps",
   "steps": [
     {
-      "id": "f0b025257bad27087cf81ab670f1066dcd67a1ca",
-      "name": "1. Given: generate two random strings",
+      "id": "c79ea6f72cc94728dc7fb43c47e8764766148c27",
+      "prefix": "GIVEN",
+      "index": 0,
+      "name": "generate two random strings",
       "arguments": [
         {
           "name": "prefix",
@@ -14,13 +16,12 @@
           "value": "both"
         }
       ],
-      "result": "(both 543620665, both -1490113817)",
+      "result": "(both -2087500087, both 633028647)",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.434868Z",
-      "finishedAt": "2024-11-11T18:07:20.440811Z"
+      "startedAt": "2024-11-13T10:22:16.382647Z",
+      "finishedAt": "2024-11-13T10:22:16.388739Z"
     }
   ],
-  "status": "PASSED",
-  "startedAt": "2024-11-11T18:07:20.434562Z",
-  "finishedAt": "2024-11-11T18:07:20.441020Z"
+  "startedAt": "2024-11-13T10:22:16.382380Z",
+  "finishedAt": "2024-11-13T10:22:16.389049Z"
 }
