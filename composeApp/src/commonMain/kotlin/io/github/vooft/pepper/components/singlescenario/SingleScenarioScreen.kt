@@ -113,7 +113,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
     ) {
         Column {
             Row(
-                modifier = Modifier.padding(4.dp),
+                modifier = Modifier.padding(horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
@@ -130,7 +130,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
                 Text(
                     modifier = Modifier.weight(6f),
                     text = step.name,
-                    style = MaterialTheme.typography.h5,
+                    style = MaterialTheme.typography.subtitle1,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )

@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -43,8 +44,7 @@ fun PepperTestScenarioListItem(modifier: Modifier = Modifier, scenario: PepperTe
         Column(
             modifier = modifier.padding(8.dp)
         ) {
-            Text(scenario.className)
-            Text(scenario.name)
+            Text(text = scenario.name, style = MaterialTheme.typography.subtitle2)
         }
     }
 }
