@@ -41,6 +41,7 @@ import io.github.vooft.pepper.components.utils.PassFailChip
 import io.github.vooft.pepper.components.utils.PepperColor
 import io.github.vooft.pepper.components.utils.color
 import io.github.vooft.pepper.reports.api.PepperScenarioStatus
+import io.github.vooft.pepper.reports.api.PepperStepPrefix
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.reports.api.PepperTestStep
 import io.github.vooft.pepper.reports.api.status
@@ -60,9 +61,42 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
 
         Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), thickness = 3.dp)
 
-        for (step in scenario.steps) {
-            ScenarioStep(modifier = Modifier.fillMaxWidth(), step = step)
+        val stepsByPrefix = buildList {
+            var currentPrefix = scenario.steps.first().prefix
+            var currentSteps = mutableListOf<PepperTestStep>()
+
+            for (step in scenario.steps) {
+                if (step.prefix != currentPrefix) {
+                    add(PrefixedSteps(prefix = currentPrefix, steps = currentSteps.toList()))
+                    currentPrefix = step.prefix
+                    currentSteps = mutableListOf()
+                }
+
+                currentSteps.add(step)
+            }
+
+            add(PrefixedSteps(prefix = currentPrefix, steps = currentSteps))
         }
+
+        for ((prefix, steps) in stepsByPrefix) {
+            Card(modifier = Modifier.padding(vertical = 4.dp), backgroundColor = PepperColor.Grey800) {
+                Column {
+                    Text(
+                        text = prefix.name,
+                        style = MaterialTheme.typography.h6,
+                        color = PepperColor.Grey400,
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        for (step in steps) {
+                            ScenarioStep(modifier = Modifier.fillMaxWidth(), step = step)
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -77,37 +111,44 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
         shape = shape,
         onClick = { expanded = !expanded }
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = when (step.status) {
-                    PepperScenarioStatus.PASSED -> Icons.Default.Check
-                    PepperScenarioStatus.FAILED -> Icons.Default.Close
-                },
-                contentDescription = null,
-                tint = step.status.color
-            )
-
-            Text(
-                modifier = Modifier.weight(6f),
-                text = step.name,
-                style = MaterialTheme.typography.h5,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            IconButton(
-                modifier = Modifier
-                    .weight(1f)
-                    .alpha(0.2f)
-                    .rotate(rotationState),
-                onClick = { expanded = !expanded }
+        Column {
+            Row(
+                modifier = Modifier.padding(4.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
-            }
-        }
+                Icon(
+                    imageVector = when (step.status) {
+                        PepperScenarioStatus.PASSED -> Icons.Default.Check
+                        PepperScenarioStatus.FAILED -> Icons.Default.Close
+                    },
+                    contentDescription = null,
+                    tint = step.status.color
+                )
 
-        if (expanded) {
-            PepperTestStepExpand(modifier = Modifier.fillMaxWidth(), step = step)
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    modifier = Modifier.weight(6f),
+                    text = step.name,
+                    style = MaterialTheme.typography.h5,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                IconButton(
+                    modifier = Modifier
+                        .weight(1f)
+                        .alpha(0.2f)
+                        .rotate(rotationState),
+                    onClick = { expanded = !expanded }
+                ) {
+                    Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
+                }
+            }
+
+            if (expanded) {
+                PepperTestStepExpand(modifier = Modifier.fillMaxWidth().padding(8.dp), step = step)
+            }
         }
     }
 }
@@ -143,3 +184,5 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
         }
     }
 }
+
+data class PrefixedSteps(val prefix: PepperStepPrefix, val steps: List<PepperTestStep>)
