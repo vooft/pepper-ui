@@ -10,9 +10,9 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import io.github.vooft.pepper.reports.api.PepperScenarioStatus
+import com.materialkolor.ktx.lighten
+import io.github.vooft.pepper.components.utils.color
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.reports.api.status
 
@@ -24,7 +24,10 @@ fun PepperTestScenarioList(
 ) {
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
         items(scenarios) { scenario ->
-            PepperTestScenarioListItem(modifier = Modifier.fillMaxWidth(), scenario = scenario, onClicked = { onScenarioClicked(scenario) })
+            PepperTestScenarioListItem(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                scenario = scenario,
+                onClicked = { onScenarioClicked(scenario) })
         }
     }
 }
@@ -33,27 +36,15 @@ fun PepperTestScenarioList(
 @Composable
 fun PepperTestScenarioListItem(modifier: Modifier = Modifier, scenario: PepperTestScenario, onClicked: () -> Unit = {}) {
     Card(
-        backgroundColor = scenario.status.color,
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp),
-        onClick = onClicked
+        backgroundColor = scenario.status.color.lighten(),
+        modifier = modifier,
+        onClick = onClicked,
     ) {
-        ScenarioListItemContent(scenario = scenario)
+        Column(
+            modifier = modifier.padding(8.dp)
+        ) {
+            Text(scenario.className)
+            Text(scenario.name)
+        }
     }
 }
-
-
-@Composable
-fun ScenarioListItemContent(modifier: Modifier = Modifier, scenario: PepperTestScenario) {
-    Column(
-        modifier = modifier.padding(8.dp)
-    ) {
-        Text(scenario.className)
-        Text(scenario.name)
-    }
-}
-
-private val PepperScenarioStatus.color: Color
-    get() = when (this) {
-        PepperScenarioStatus.PASSED -> Color.Green
-        PepperScenarioStatus.FAILED -> Color.Red
-    }

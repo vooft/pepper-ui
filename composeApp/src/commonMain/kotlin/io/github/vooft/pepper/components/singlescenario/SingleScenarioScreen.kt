@@ -7,14 +7,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.DrawerDefaults.shape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
@@ -34,13 +33,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import io.github.vooft.pepper.components.utils.PassFailChip
+import io.github.vooft.pepper.components.utils.PepperColor
+import io.github.vooft.pepper.components.utils.color
 import io.github.vooft.pepper.reports.api.PepperScenarioStatus
+import io.github.vooft.pepper.reports.api.PepperStepPrefix
 import io.github.vooft.pepper.reports.api.PepperTestScenario
 import io.github.vooft.pepper.reports.api.PepperTestStep
 import io.github.vooft.pepper.reports.api.status
@@ -50,22 +51,52 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
-        Text(text = scenario.className, fontStyle = FontStyle.Italic)
-
-        Row(modifier = Modifier.fillMaxWidth()) {
-            when (scenario.status) {
-                PepperScenarioStatus.PASSED -> Text(text = "PASS", color = Color.Green, style = MaterialTheme.typography.h5)
-                PepperScenarioStatus.FAILED -> Text(text = "FAIL", color = Color.Red, style = MaterialTheme.typography.h5)
-            }
-            Spacer(modifier = Modifier.width(4.dp))
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            PassFailChip(status = scenario.status)
+            Spacer(modifier = Modifier.width(8.dp))
             Text(text = scenario.name, style = MaterialTheme.typography.h5)
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = scenario.className, style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
 
-        for (step in scenario.steps) {
-            ScenarioStep(modifier = Modifier.fillMaxWidth(), step = step)
+        Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), thickness = 3.dp)
+
+        val stepsByPrefix = buildList {
+            var currentPrefix = scenario.steps.first().prefix
+            var currentSteps = mutableListOf<PepperTestStep>()
+
+            for (step in scenario.steps) {
+                if (step.prefix != currentPrefix) {
+                    add(PrefixedSteps(prefix = currentPrefix, steps = currentSteps.toList()))
+                    currentPrefix = step.prefix
+                    currentSteps = mutableListOf()
+                }
+
+                currentSteps.add(step)
+            }
+
+            add(PrefixedSteps(prefix = currentPrefix, steps = currentSteps))
         }
+
+        for ((prefix, steps) in stepsByPrefix) {
+            Card(modifier = Modifier.padding(vertical = 4.dp), backgroundColor = PepperColor.Grey800) {
+                Column {
+                    Text(
+                        text = prefix.name,
+                        style = MaterialTheme.typography.h6,
+                        color = PepperColor.Grey400,
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        for (step in steps) {
+                            ScenarioStep(modifier = Modifier.fillMaxWidth(), step = step)
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -80,19 +111,21 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
         shape = shape,
         onClick = { expanded = !expanded }
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+        Column {
+            Row(
+                modifier = Modifier.padding(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Icon(
                     imageVector = when (step.status) {
                         PepperScenarioStatus.PASSED -> Icons.Default.Check
                         PepperScenarioStatus.FAILED -> Icons.Default.Close
                     },
                     contentDescription = null,
-                    tint = when (step.status) {
-                        PepperScenarioStatus.PASSED -> Color.Green
-                        PepperScenarioStatus.FAILED -> Color.Red
-                    }
+                    tint = step.status.color
                 )
+
+                Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
                     modifier = Modifier.weight(6f),
@@ -114,7 +147,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
             }
 
             if (expanded) {
-                PepperTestStepExpand(modifier = Modifier.fillMaxWidth(), step = step)
+                PepperTestStepExpand(modifier = Modifier.fillMaxWidth().padding(8.dp), step = step)
             }
         }
     }
@@ -151,3 +184,5 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
         }
     }
 }
+
+data class PrefixedSteps(val prefix: PepperStepPrefix, val steps: List<PepperTestStep>)
