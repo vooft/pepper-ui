@@ -5,8 +5,10 @@
   "name": "my test scenario",
   "steps": [
     {
-      "id": "dcfd2e46f2a8f796f20d14c28d4135a8dc826823",
-      "name": "01. Given: generate random string",
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 0,
+      "name": "generate random string",
       "arguments": [
         {
           "name": "prefix",
@@ -14,14 +16,16 @@
           "value": "first"
         }
       ],
-      "result": "first -1346360293",
+      "result": "first -442258702",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.384058Z",
-      "finishedAt": "2024-11-11T18:07:20.387241Z"
+      "startedAt": "2024-11-13T10:22:16.338439Z",
+      "finishedAt": "2024-11-13T10:22:16.341808Z"
     },
     {
-      "id": "8e197fe0e8946463bfcff2c1278b132fd3362601",
-      "name": "02. And: generate random string",
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 1,
+      "name": "generate random string",
       "arguments": [
         {
           "name": "prefix",
@@ -29,39 +33,43 @@
           "value": "second"
         }
       ],
-      "result": "second 321065253",
+      "result": "second -263689743",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.387567Z",
-      "finishedAt": "2024-11-11T18:07:20.390704Z"
+      "startedAt": "2024-11-13T10:22:16.342214Z",
+      "finishedAt": "2024-11-13T10:22:16.345469Z"
     },
     {
-      "id": "7c37f92f50540e5f03e172a2e940557860b4073a",
-      "name": "03. When: two strings are compared",
+      "id": "944007ae5d56a056c754860f21efa03075ae0dab",
+      "prefix": "WHEN",
+      "index": 2,
+      "name": "two strings are compared",
       "arguments": [
         {
           "name": "first",
           "type": "kotlin.String",
-          "value": "first -1346360293"
+          "value": "first -442258702"
         },
         {
           "name": "second",
           "type": "kotlin.String",
-          "value": "second 321065253"
+          "value": "second -263689743"
         }
       ],
-      "result": "CompareResult(first=first -1346360293, second=second 321065253, result=false)",
+      "result": "CompareResult(first=first -442258702, second=second -263689743, result=false)",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.391050Z",
-      "finishedAt": "2024-11-11T18:07:20.393035Z"
+      "startedAt": "2024-11-13T10:22:16.345943Z",
+      "finishedAt": "2024-11-13T10:22:16.348121Z"
     },
     {
-      "id": "8072da82cabc0b7636ad0f411e6b86dee397c8a4",
-      "name": "04. Then: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 3,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -71,17 +79,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.393417Z",
-      "finishedAt": "2024-11-11T18:07:20.400681Z"
+      "startedAt": "2024-11-13T10:22:16.348834Z",
+      "finishedAt": "2024-11-13T10:22:16.351114Z"
     },
     {
-      "id": "167d52911a4ef2571b47aa6d01577d61911f1f56",
-      "name": "05. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 4,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -91,17 +101,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.401434Z",
-      "finishedAt": "2024-11-11T18:07:20.403915Z"
+      "startedAt": "2024-11-13T10:22:16.351485Z",
+      "finishedAt": "2024-11-13T10:22:16.353751Z"
     },
     {
-      "id": "ca3bd20cd45bd17e95b7056e267ef7ec205f0fc2",
-      "name": "06. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 5,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -111,17 +123,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.405316Z",
-      "finishedAt": "2024-11-11T18:07:20.408131Z"
+      "startedAt": "2024-11-13T10:22:16.354213Z",
+      "finishedAt": "2024-11-13T10:22:16.356281Z"
     },
     {
-      "id": "a97af09bbe89d81e6ae6b836b7be5d663da20f7e",
-      "name": "07. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 6,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -131,17 +145,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.408793Z",
-      "finishedAt": "2024-11-11T18:07:20.410967Z"
+      "startedAt": "2024-11-13T10:22:16.356608Z",
+      "finishedAt": "2024-11-13T10:22:16.358912Z"
     },
     {
-      "id": "4ace5f1f40fa1c092c42c6bdfa4ae3b0c5d7475c",
-      "name": "08. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 7,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -151,17 +167,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.411360Z",
-      "finishedAt": "2024-11-11T18:07:20.413418Z"
+      "startedAt": "2024-11-13T10:22:16.359304Z",
+      "finishedAt": "2024-11-13T10:22:16.361476Z"
     },
     {
-      "id": "2ddb1bf0cc3836c616a747485d158cd20102f4c6",
-      "name": "09. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 8,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -171,17 +189,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.413704Z",
-      "finishedAt": "2024-11-11T18:07:20.415735Z"
+      "startedAt": "2024-11-13T10:22:16.361780Z",
+      "finishedAt": "2024-11-13T10:22:16.363963Z"
     },
     {
-      "id": "4c5035fdfe27eb42192d1809912b0b30bf6392e0",
-      "name": "10. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 9,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -191,17 +211,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.416093Z",
-      "finishedAt": "2024-11-11T18:07:20.418221Z"
+      "startedAt": "2024-11-13T10:22:16.364315Z",
+      "finishedAt": "2024-11-13T10:22:16.366494Z"
     },
     {
-      "id": "85011a7befdb8469e07e551fe4d4ca1d0b9aac5d",
-      "name": "11. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 10,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -211,17 +233,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.418647Z",
-      "finishedAt": "2024-11-11T18:07:20.420802Z"
+      "startedAt": "2024-11-13T10:22:16.366889Z",
+      "finishedAt": "2024-11-13T10:22:16.369086Z"
     },
     {
-      "id": "01c4c8508dc563a40c22c0aee806933450bbdf55",
-      "name": "12. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 11,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -231,17 +255,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.421225Z",
-      "finishedAt": "2024-11-11T18:07:20.423471Z"
+      "startedAt": "2024-11-13T10:22:16.369373Z",
+      "finishedAt": "2024-11-13T10:22:16.371458Z"
     },
     {
-      "id": "a2289bd686de37988c399f0caded7de652e6414d",
-      "name": "13. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 12,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -251,17 +277,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.423982Z",
-      "finishedAt": "2024-11-11T18:07:20.426134Z"
+      "startedAt": "2024-11-13T10:22:16.371809Z",
+      "finishedAt": "2024-11-13T10:22:16.374075Z"
     },
     {
-      "id": "56b1f6c217e6c4f597e7cef5b9d41d13be45a9f9",
-      "name": "14. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 13,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -271,17 +299,19 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.426495Z",
-      "finishedAt": "2024-11-11T18:07:20.428547Z"
+      "startedAt": "2024-11-13T10:22:16.374524Z",
+      "finishedAt": "2024-11-13T10:22:16.376627Z"
     },
     {
-      "id": "83040bc35a40d7e8c24099e372ce95bbe640de64",
-      "name": "15. And: compare result is 'false'",
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 14,
+      "name": "compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.CompareResult",
-          "value": "CompareResult(first=first -1346360293, second=second 321065253, result=false)"
+          "value": "CompareResult(first=first -442258702, second=second -263689743, result=false)"
         },
         {
           "name": "expected",
@@ -291,11 +321,10 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.428892Z",
-      "finishedAt": "2024-11-11T18:07:20.431059Z"
+      "startedAt": "2024-11-13T10:22:16.377117Z",
+      "finishedAt": "2024-11-13T10:22:16.379240Z"
     }
   ],
-  "status": "PASSED",
-  "startedAt": "2024-11-11T18:07:20.383744Z",
-  "finishedAt": "2024-11-11T18:07:20.431341Z"
+  "startedAt": "2024-11-13T10:22:16.337988Z",
+  "finishedAt": "2024-11-13T10:22:16.379442Z"
 }

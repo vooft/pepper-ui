@@ -5,8 +5,10 @@
   "name": "my test scenario",
   "steps": [
     {
-      "id": "324ec75838cd7dc147e874f36f532e588072e9e3",
-      "name": "1. Given: generate random string",
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 0,
+      "name": "generate random string",
       "arguments": [
         {
           "name": "prefix",
@@ -14,14 +16,16 @@
           "value": "first"
         }
       ],
-      "result": "first 1912749563",
+      "result": "first 1434258692",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.443280Z",
-      "finishedAt": "2024-11-11T18:07:20.446293Z"
+      "startedAt": "2024-11-13T10:22:16.392104Z",
+      "finishedAt": "2024-11-13T10:22:16.395358Z"
     },
     {
-      "id": "48ad122cdaf45989c312474b335628fbd08e20d2",
-      "name": "2. And: generate random string",
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 1,
+      "name": "generate random string",
       "arguments": [
         {
           "name": "prefix",
@@ -29,39 +33,43 @@
           "value": "second"
         }
       ],
-      "result": "second 412085991",
+      "result": "second -906430921",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.446550Z",
-      "finishedAt": "2024-11-11T18:07:20.449555Z"
+      "startedAt": "2024-11-13T10:22:16.395768Z",
+      "finishedAt": "2024-11-13T10:22:16.398904Z"
     },
     {
-      "id": "ed4583b1a915d8d7e14db54ab9e7e3a6c3822559",
-      "name": "3. When: two strings are compared",
+      "id": "944007ae5d56a056c754860f21efa03075ae0dab",
+      "prefix": "WHEN",
+      "index": 2,
+      "name": "two strings are compared",
       "arguments": [
         {
           "name": "first",
           "type": "kotlin.String",
-          "value": "first 1912749563"
+          "value": "first 1434258692"
         },
         {
           "name": "second",
           "type": "kotlin.String",
-          "value": "second 412085991"
+          "value": "second -906430921"
         }
       ],
-      "result": "CompareResult(first=first 1912749563, second=second 412085991, result=false)",
+      "result": "CompareResult(first=first 1434258692, second=second -906430921, result=false)",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.449805Z",
-      "finishedAt": "2024-11-11T18:07:20.451627Z"
+      "startedAt": "2024-11-13T10:22:16.399232Z",
+      "finishedAt": "2024-11-13T10:22:16.401220Z"
     },
     {
-      "id": "93822df29df393db21d2e0fb5ec6ec1203ad2808",
-      "name": "4. Then: deep nested compare result is 'false'",
+      "id": "1cb55f8cec19ed0a01d959a3849b0a46aa230387",
+      "prefix": "THEN",
+      "index": 3,
+      "name": "deep nested compare result is 'false'",
       "arguments": [
         {
           "name": "compareResult",
           "type": "io.github.vooft.pepper.sample.Holder",
-          "value": "Holder(value=Holder(value=CompareResult(first=first 1912749563, second=second 412085991, result=false)))"
+          "value": "Holder(value=Holder(value=CompareResult(first=first 1434258692, second=second -906430921, result=false)))"
         },
         {
           "name": "expected",
@@ -71,11 +79,10 @@
       ],
       "result": "kotlin.Unit",
       "error": null,
-      "startedAt": "2024-11-11T18:07:20.452006Z",
-      "finishedAt": "2024-11-11T18:07:20.453837Z"
+      "startedAt": "2024-11-13T10:22:16.401689Z",
+      "finishedAt": "2024-11-13T10:22:16.403634Z"
     }
   ],
-  "status": "PASSED",
-  "startedAt": "2024-11-11T18:07:20.443092Z",
-  "finishedAt": "2024-11-11T18:07:20.453990Z"
+  "startedAt": "2024-11-13T10:22:16.391747Z",
+  "finishedAt": "2024-11-13T10:22:16.403798Z"
 }
