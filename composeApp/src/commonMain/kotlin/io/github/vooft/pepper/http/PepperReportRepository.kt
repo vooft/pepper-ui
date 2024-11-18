@@ -1,15 +1,15 @@
 package io.github.vooft.pepper.http
 
-import io.github.vooft.pepper.reports.api.PepperTestScenario
-import io.github.vooft.pepper.reports.api.PepperTestSuite
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
+import io.github.vooft.pepper.reports.api.PepperTestSuiteDto
 import kotlinx.serialization.Serializable
 
 interface PepperReportRepository {
     suspend fun loadRoot(): PepperRoot
 
-    suspend fun loadSuite(path: String): PepperTestSuite
+    suspend fun loadSuite(path: String): PepperTestSuiteDto
 
-    suspend fun loadScenario(path: String, scenarioId: String): PepperTestScenario
+    suspend fun loadScenario(path: String, scenarioId: String): PepperTestScenarioDto
 }
 
 @Serializable

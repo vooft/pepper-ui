@@ -8,7 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import io.github.vooft.pepper.http.PepperRoot
-import io.github.vooft.pepper.reports.api.PepperTestScenario
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -16,7 +16,7 @@ fun PepperTestScenarioListScreen(
     suiteItem: PepperRoot.PepperSuiteItem,
     modifier: Modifier = Modifier,
     viewModel: PepperTestScenarioListViewModel = koinViewModel(),
-    onScenarioClicked: (PepperTestScenario) -> Unit = {}
+    onScenarioClicked: (PepperTestScenarioDto) -> Unit = {}
 ) {
     val viewModelState by viewModel.state.collectAsState()
 

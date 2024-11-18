@@ -14,14 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.materialkolor.ktx.lighten
 import io.github.vooft.pepper.components.utils.color
-import io.github.vooft.pepper.reports.api.PepperTestScenario
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import io.github.vooft.pepper.reports.api.status
 
 @Composable
 fun PepperTestScenarioList(
     modifier: Modifier = Modifier,
-    scenarios: List<PepperTestScenario>,
-    onScenarioClicked: (PepperTestScenario) -> Unit = {}
+    scenarios: List<PepperTestScenarioDto>,
+    onScenarioClicked: (PepperTestScenarioDto) -> Unit = {}
 ) {
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
         items(scenarios) { scenario ->
@@ -35,7 +35,7 @@ fun PepperTestScenarioList(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PepperTestScenarioListItem(modifier: Modifier = Modifier, scenario: PepperTestScenario, onClicked: () -> Unit = {}) {
+fun PepperTestScenarioListItem(modifier: Modifier = Modifier, scenario: PepperTestScenarioDto, onClicked: () -> Unit = {}) {
     Card(
         backgroundColor = scenario.status.color.lighten(),
         modifier = modifier,

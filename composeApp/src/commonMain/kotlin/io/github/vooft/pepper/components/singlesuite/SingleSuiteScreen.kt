@@ -16,13 +16,13 @@ import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioListScreen
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
 import io.github.vooft.pepper.http.PepperRoot
-import io.github.vooft.pepper.reports.api.PepperTestScenario
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 
 @Composable
 fun SingleSuiteScreen(modifier: Modifier = Modifier) {
     val suiteItem = PepperRoot.PepperSuiteItem(name = "Sample", path = "sample-report")
 
-    var selectedScenario by remember { mutableStateOf<PepperTestScenario?>(null) }
+    var selectedScenario by remember { mutableStateOf<PepperTestScenarioDto?>(null) }
     Row(modifier = modifier.fillMaxSize().padding(4.dp)) {
         PepperTestScenarioListScreen(suiteItem = suiteItem, modifier = Modifier.weight(0.3f).fillMaxHeight().padding(4.dp)) {
             selectedScenario = it
@@ -33,7 +33,7 @@ fun SingleSuiteScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun SingleSuiteScreenRightPane(modifier: Modifier = Modifier, scenario: PepperTestScenario?) {
+private fun SingleSuiteScreenRightPane(modifier: Modifier = Modifier, scenario: PepperTestScenarioDto?) {
     Box(modifier = modifier) {
         if (scenario == null) {
             Text("Select scenario")

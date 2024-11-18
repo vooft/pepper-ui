@@ -22,6 +22,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
@@ -40,14 +41,14 @@ import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.utils.PassFailChip
 import io.github.vooft.pepper.components.utils.PepperColor
 import io.github.vooft.pepper.components.utils.color
-import io.github.vooft.pepper.reports.api.PepperScenarioStatus
 import io.github.vooft.pepper.reports.api.PepperStepPrefix
-import io.github.vooft.pepper.reports.api.PepperTestScenario
-import io.github.vooft.pepper.reports.api.PepperTestStep
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
+import io.github.vooft.pepper.reports.api.PepperTestStatus
+import io.github.vooft.pepper.reports.api.PepperTestStepDto
 import io.github.vooft.pepper.reports.api.status
 
 @Composable
-fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScenario) {
+fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScenarioDto) {
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
@@ -63,7 +64,7 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
 
         val stepsByPrefix = buildList {
             var currentPrefix = scenario.steps.first().prefix
-            var currentSteps = mutableListOf<PepperTestStep>()
+            var currentSteps = mutableListOf<PepperTestStepDto>()
 
             for (step in scenario.steps) {
                 if (step.prefix != currentPrefix) {
@@ -102,7 +103,7 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
+private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto) {
     var expanded by remember(key1 = step) { mutableStateOf(false) }
     val rotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
@@ -118,8 +119,9 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
             ) {
                 Icon(
                     imageVector = when (step.status) {
-                        PepperScenarioStatus.PASSED -> Icons.Default.Check
-                        PepperScenarioStatus.FAILED -> Icons.Default.Close
+                        PepperTestStatus.PASSED -> Icons.Default.Check
+                        PepperTestStatus.FAILED -> Icons.Default.Close
+                        PepperTestStatus.SKIPPED -> Icons.Default.Cancel
                     },
                     contentDescription = null,
                     tint = step.status.color
@@ -154,7 +156,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStep) {
 }
 
 @Composable
-private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTestStep) {
+private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTestStepDto) {
     Column(modifier = modifier) {
         for (argument in step.arguments) {
             Row(modifier = Modifier.fillMaxWidth()) {
@@ -185,4 +187,4 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
     }
 }
 
-data class PrefixedSteps(val prefix: PepperStepPrefix, val steps: List<PepperTestStep>)
+data class PrefixedSteps(val prefix: PepperStepPrefix, val steps: List<PepperTestStepDto>)
