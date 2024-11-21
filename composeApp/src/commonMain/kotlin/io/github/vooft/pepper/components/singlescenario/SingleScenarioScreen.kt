@@ -4,6 +4,8 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,11 +14,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
-import androidx.compose.material.DrawerDefaults.shape
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -35,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -56,8 +58,12 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
     ) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             PassFailChip(status = scenario.status)
+
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = scenario.name, style = MaterialTheme.typography.h5)
+
+            SelectionContainer {
+                Text(text = scenario.name, style = MaterialTheme.typography.button)
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -68,7 +74,9 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
             }
         }
 
-        Text(text = scenario.className, style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
+        SelectionContainer {
+            Text(text = scenario.className, style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
+        }
 
         Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), thickness = 3.dp)
 
@@ -101,7 +109,7 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
 
                     Column(modifier = Modifier.padding(8.dp)) {
                         for (step in steps) {
-                            ScenarioStep(modifier = Modifier.fillMaxWidth(), step = step)
+                            ScenarioStep(modifier = Modifier.fillMaxWidth().background(Color.White), step = step)
                         }
                     }
                 }
@@ -110,68 +118,63 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto) {
     var expanded by remember(key1 = step) { mutableStateOf(false) }
     val rotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
-    Card(
+    Column(
         modifier = modifier.animateContentSize(animationSpec = tween(durationMillis = 300, easing = LinearOutSlowInEasing)),
-        shape = shape,
-        onClick = { expanded = !expanded }
     ) {
-        Column {
+        Row(
+            modifier = Modifier.padding(horizontal = 4.dp).clickable { expanded = !expanded },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = when (step.status) {
+                    PepperTestStatus.PASSED -> Icons.Default.Check
+                    PepperTestStatus.FAILED -> Icons.Default.Close
+                    PepperTestStatus.SKIPPED -> Icons.Default.Cancel
+                },
+                contentDescription = null,
+                tint = step.status.color
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = step.name,
+                style = MaterialTheme.typography.subtitle1,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
             Row(
-                modifier = Modifier.padding(horizontal = 4.dp),
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    imageVector = when (step.status) {
-                        PepperTestStatus.PASSED -> Icons.Default.Check
-                        PepperTestStatus.FAILED -> Icons.Default.Close
-                        PepperTestStatus.SKIPPED -> Icons.Default.Cancel
-                    },
-                    contentDescription = null,
-                    tint = step.status.color
-                )
+                if (step.status == PepperTestStatus.PASSED) {
+                    Text(
+                        text = step.duration.toString(),
+                        style = MaterialTheme.typography.caption,
+                        color = PepperColor.Grey400
+                    )
 
-                Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
 
-                Text(
-                    text = step.name,
-                    style = MaterialTheme.typography.subtitle1,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
+                IconButton(
+                    modifier = Modifier.alpha(0.2f).rotate(rotationState),
+                    onClick = { expanded = !expanded }
                 ) {
-                    if (step.status == PepperTestStatus.PASSED) {
-                        Text(
-                            text = step.duration.toString(),
-                            style = MaterialTheme.typography.caption,
-                            color = PepperColor.Grey400
-                        )
-
-                        Spacer(modifier = Modifier.width(8.dp))
-                    }
-
-                    IconButton(
-                        modifier = Modifier.alpha(0.2f).rotate(rotationState),
-                        onClick = { expanded = !expanded }
-                    ) {
-                        Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
-                    }
+                    Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
                 }
             }
+        }
 
-            if (expanded) {
-                PepperTestStepExpand(modifier = Modifier.fillMaxWidth().padding(8.dp), step = step)
-            }
+        if (expanded) {
+            PepperTestStepExpand(modifier = Modifier.fillMaxWidth().padding(8.dp), step = step)
         }
     }
 }
@@ -179,30 +182,57 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto)
 @Composable
 private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTestStepDto) {
     Column(modifier = modifier) {
-        for (argument in step.arguments) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = argument.name,
-                    fontFamily = FontFamily.Monospace,
-                    fontWeight = FontWeight.Bold
-                )
+        if (step.arguments.isNotEmpty()) {
+            Column(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
+                Text("Arguments:", style = MaterialTheme.typography.h6)
 
-                Spacer(modifier = Modifier.width(4.dp))
+                for (argument in step.arguments) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        SelectionContainer {
+                            Text(
+                                text = argument.name,
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
 
-                Text(
-                    text = argument.value,
-                    fontFamily = FontFamily.Monospace
-                )
+                        Spacer(modifier = Modifier.width(4.dp))
+
+                        SelectionContainer {
+                            Text(
+                                text = argument.value,
+                                fontFamily = FontFamily.Monospace
+                            )
+                        }
+                    }
+                }
             }
+
         }
 
         val error = step.error
         if (error != null) {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = error.message,
-                fontFamily = FontFamily.Monospace
-            )
+            Column(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
+                Text("Error:", style = MaterialTheme.typography.h6)
+
+                var stacktraceExpanded by remember { mutableStateOf(false) }
+                Text(
+                    modifier = Modifier.padding(8.dp).clickable { stacktraceExpanded = !stacktraceExpanded },
+                    text = error.message,
+                    color = PepperColor.Red500,
+                    fontFamily = FontFamily.Monospace
+                )
+
+                if (stacktraceExpanded) {
+                    SelectionContainer {
+                        Text(
+                            modifier = Modifier.background(PepperColor.Grey300).padding(8.dp),
+                            text = error.stacktrace,
+                            fontFamily = FontFamily.Monospace,
+                        )
+                    }
+                }
+            }
         }
     }
 }
