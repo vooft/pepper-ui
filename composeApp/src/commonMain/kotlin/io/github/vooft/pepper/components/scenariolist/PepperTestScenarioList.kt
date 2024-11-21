@@ -11,10 +11,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.materialkolor.ktx.lighten
@@ -27,19 +23,17 @@ import io.github.vooft.pepper.reports.api.status
 fun PepperTestScenarioList(
     modifier: Modifier = Modifier,
     scenarios: List<PepperTestScenarioDto>,
+    selectedScenario: PepperTestScenarioDto?,
     onScenarioClicked: (PepperTestScenarioDto) -> Unit = {}
 ) {
-    var selected by remember { mutableStateOf("") }
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
         items(scenarios) { scenario ->
             PepperTestScenarioListItem(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                 scenario = scenario,
-                selected = selected == scenario.id,
-                onClicked = {
-                    selected = scenario.id
-                    onScenarioClicked(scenario)
-                })
+                selected = selectedScenario?.id == scenario.id,
+                onClicked = { onScenarioClicked(scenario) }
+            )
         }
     }
 }
