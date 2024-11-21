@@ -1,4 +1,4 @@
-package io.github.vooft.pepper.components.scenariolist
+package io.github.vooft.pepper.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class PepperTestScenarioListViewModel(private val repository: PepperReportRepository) : ViewModel() {
+class PepperReportModel(private val repository: PepperReportRepository) : ViewModel() {
     private val _state = MutableStateFlow<ModelState>(ModelState.Empty)
     val state = _state.asStateFlow()
 
