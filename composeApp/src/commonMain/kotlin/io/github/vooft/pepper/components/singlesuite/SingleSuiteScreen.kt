@@ -26,7 +26,7 @@ fun SingleSuiteScreen(modifier: Modifier = Modifier, viewModel: PepperTestScenar
     val viewModelState by viewModel.state.collectAsState()
     when (val state = viewModelState) {
         PepperTestScenarioListViewModel.ModelState.Empty -> {
-            viewModel.loadSuite(PepperRoot.PepperSuiteItem(name = "Sample", path = "sample-report"))
+            viewModel.loadSuite(PepperRoot.PepperSuiteItem(name = "Report 1", path = "report1"))
         }
 
         PepperTestScenarioListViewModel.ModelState.Loading -> {
