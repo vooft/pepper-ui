@@ -1,1 +1,92 @@
-{"id":"800e34c9cd42e43ded777a6a38cf8c691ac63dd1","version":1,"className":"io.github.vooft.pepper.sample.TwoScenariosSpec","name":"first scenario","steps":[{"id":"76d176eec509112bbf4826f64722a542a2b4eb92","prefix":"GIVEN","index":0,"name":"generate random string","status":"PASSED","arguments":[{"name":"prefix","type":"kotlin.String","value":"first"}],"result":"first 735026797","error":null,"startedAt":"2024-11-18T19:01:08.875478Z","finishedAt":"2024-11-18T19:01:08.878586Z"},{"id":"76d176eec509112bbf4826f64722a542a2b4eb92","prefix":"GIVEN","index":1,"name":"generate random string","status":"PASSED","arguments":[{"name":"prefix","type":"kotlin.String","value":"second"}],"result":"second -1050754177","error":null,"startedAt":"2024-11-18T19:01:08.878912Z","finishedAt":"2024-11-18T19:01:08.882051Z"},{"id":"944007ae5d56a056c754860f21efa03075ae0dab","prefix":"WHEN","index":2,"name":"two strings are compared","status":"PASSED","arguments":[{"name":"first","type":"kotlin.String","value":"first 735026797"},{"name":"second","type":"kotlin.String","value":"second -1050754177"}],"result":"CompareResult(first=first 735026797, second=second -1050754177, result=false)","error":null,"startedAt":"2024-11-18T19:01:08.882364Z","finishedAt":"2024-11-18T19:01:08.884236Z"},{"id":"f3b27ba8355644ef329dbd7d879320f54d3441c2","prefix":"THEN","index":3,"name":"compare result is 'false'","status":"PASSED","arguments":[{"name":"compareResult","type":"io.github.vooft.pepper.sample.CompareResult","value":"CompareResult(first=first 735026797, second=second -1050754177, result=false)"},{"name":"expected","type":"kotlin.Boolean","value":"false"}],"result":"kotlin.Unit","error":null,"startedAt":"2024-11-18T19:01:08.884598Z","finishedAt":"2024-11-18T19:01:08.886403Z"}],"startedAt":"2024-11-18T19:01:08.875294Z","finishedAt":"2024-11-18T19:01:08.886532Z"}
+{
+  "id": "800e34c9cd42e43ded777a6a38cf8c691ac63dd1",
+  "version": 1,
+  "className": "io.github.vooft.pepper.sample.TwoScenariosSpec",
+  "name": "first scenario",
+  "steps": [
+    {
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 0,
+      "name": "generate random string",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "prefix",
+          "type": "kotlin.String",
+          "value": "first"
+        }
+      ],
+      "result": "first -1058695163",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.569015Z",
+      "finishedAt": "2024-11-21T19:30:20.572094Z"
+    },
+    {
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 1,
+      "name": "generate random string",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "prefix",
+          "type": "kotlin.String",
+          "value": "second"
+        }
+      ],
+      "result": "second -563654852",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.572305Z",
+      "finishedAt": "2024-11-21T19:30:20.575361Z"
+    },
+    {
+      "id": "944007ae5d56a056c754860f21efa03075ae0dab",
+      "prefix": "WHEN",
+      "index": 2,
+      "name": "two strings are compared",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "first",
+          "type": "kotlin.String",
+          "value": "first -1058695163"
+        },
+        {
+          "name": "second",
+          "type": "kotlin.String",
+          "value": "second -563654852"
+        }
+      ],
+      "result": "CompareResult(first=first -1058695163, second=second -563654852, result=false)",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.575570Z",
+      "finishedAt": "2024-11-21T19:30:20.577388Z"
+    },
+    {
+      "id": "f3b27ba8355644ef329dbd7d879320f54d3441c2",
+      "prefix": "THEN",
+      "index": 3,
+      "name": "compare result is 'false'",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "compareResult",
+          "type": "io.github.vooft.pepper.sample.CompareResult",
+          "value": "CompareResult(first=first -1058695163, second=second -563654852, result=false)"
+        },
+        {
+          "name": "expected",
+          "type": "kotlin.Boolean",
+          "value": "false"
+        }
+      ],
+      "result": "kotlin.Unit",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.577846Z",
+      "finishedAt": "2024-11-21T19:30:20.579825Z"
+    }
+  ],
+  "startedAt": "2024-11-21T19:30:20.568864Z",
+  "finishedAt": "2024-11-21T19:30:20.579941Z"
+}

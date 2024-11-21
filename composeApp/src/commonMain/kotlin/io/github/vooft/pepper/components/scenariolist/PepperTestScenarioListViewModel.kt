@@ -25,7 +25,7 @@ class PepperTestScenarioListViewModel(private val repository: PepperReportReposi
         viewModelScope.launch {
             _state.value = ModelState.Loading
             val scenarios = suite.scenarios.map {
-                repository.loadScenario(suiteItem.path, it)
+                repository.loadScenario(suiteItem.path, it.id)
             }
 
             _state.value = ModelState.ScenariosLoaded(suite, scenarios)

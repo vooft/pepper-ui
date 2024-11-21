@@ -1,1 +1,57 @@
-{"version":1,"scenarios":["474d7e10d0a42644f083c7f9a7f17e8d279f903a","c7f71d55c7c9c54cef8cf89364b2133816480fee","09535247b28b579f3eaec92d384a1cade09f4c9d","9a2ce83979c7d67d7605a9501e751cd54692699c","feea0dd7e4a8ade73ab47e6574bfd214d78b1eee","55c04a2d18a6c32cf5ca2e03942bb51d024ae49f","ea4254d458307cd43485dd08000884e5de73685d","c190875fe2dc3d983db588f1c7b2b82f4902efa8","800e34c9cd42e43ded777a6a38cf8c691ac63dd1","8b1e55a93602871c4a26313a3027b5eacb145e1a"],"startedAt":"2024-11-18T19:01:08.634203Z","finishedAt":"2024-11-18T19:01:08.899794Z"}
+{
+  "version": 1,
+  "scenarios": [
+    {
+      "id": "474d7e10d0a42644f083c7f9a7f17e8d279f903a",
+      "name": "multiply by two: example 1",
+      "status": "PASSED"
+    },
+    {
+      "id": "c7f71d55c7c9c54cef8cf89364b2133816480fee",
+      "name": "multiply by two: example 2",
+      "status": "PASSED"
+    },
+    {
+      "id": "09535247b28b579f3eaec92d384a1cade09f4c9d",
+      "name": "multiply by two: example 3",
+      "status": "PASSED"
+    },
+    {
+      "id": "9a2ce83979c7d67d7605a9501e751cd54692699c",
+      "name": "failing scenario",
+      "status": "FAILED"
+    },
+    {
+      "id": "feea0dd7e4a8ade73ab47e6574bfd214d78b1eee",
+      "name": "failing scenario",
+      "status": "FAILED"
+    },
+    {
+      "id": "55c04a2d18a6c32cf5ca2e03942bb51d024ae49f",
+      "name": "my test scenario",
+      "status": "PASSED"
+    },
+    {
+      "id": "ea4254d458307cd43485dd08000884e5de73685d",
+      "name": "Nested steps",
+      "status": "PASSED"
+    },
+    {
+      "id": "c190875fe2dc3d983db588f1c7b2b82f4902efa8",
+      "name": "my test scenario",
+      "status": "PASSED"
+    },
+    {
+      "id": "800e34c9cd42e43ded777a6a38cf8c691ac63dd1",
+      "name": "first scenario",
+      "status": "PASSED"
+    },
+    {
+      "id": "8b1e55a93602871c4a26313a3027b5eacb145e1a",
+      "name": "second scenario",
+      "status": "PASSED"
+    }
+  ],
+  "startedAt": "2024-11-21T19:30:20.323379Z",
+  "finishedAt": "2024-11-21T19:30:20.593207Z"
+}

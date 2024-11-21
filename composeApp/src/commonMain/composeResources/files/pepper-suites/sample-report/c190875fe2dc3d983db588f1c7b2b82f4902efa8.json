@@ -1,1 +1,92 @@
-{"id":"c190875fe2dc3d983db588f1c7b2b82f4902efa8","version":1,"className":"io.github.vooft.pepper.sample.SimplePepperSpec","name":"my test scenario","steps":[{"id":"76d176eec509112bbf4826f64722a542a2b4eb92","prefix":"GIVEN","index":0,"name":"generate random string","status":"PASSED","arguments":[{"name":"prefix","type":"kotlin.String","value":"first"}],"result":"first 414653435","error":null,"startedAt":"2024-11-18T19:01:08.861983Z","finishedAt":"2024-11-18T19:01:08.865074Z"},{"id":"76d176eec509112bbf4826f64722a542a2b4eb92","prefix":"GIVEN","index":1,"name":"generate random string","status":"PASSED","arguments":[{"name":"prefix","type":"kotlin.String","value":"second"}],"result":"second -713125493","error":null,"startedAt":"2024-11-18T19:01:08.865332Z","finishedAt":"2024-11-18T19:01:08.868505Z"},{"id":"944007ae5d56a056c754860f21efa03075ae0dab","prefix":"WHEN","index":2,"name":"two strings are compared","status":"PASSED","arguments":[{"name":"first","type":"kotlin.String","value":"first 414653435"},{"name":"second","type":"kotlin.String","value":"second -713125493"}],"result":"CompareResult(first=first 414653435, second=second -713125493, result=false)","error":null,"startedAt":"2024-11-18T19:01:08.868787Z","finishedAt":"2024-11-18T19:01:08.870620Z"},{"id":"1cb55f8cec19ed0a01d959a3849b0a46aa230387","prefix":"THEN","index":3,"name":"deep nested compare result is 'false'","status":"PASSED","arguments":[{"name":"compareResult","type":"io.github.vooft.pepper.sample.Holder","value":"Holder(value=Holder(value=CompareResult(first=first 414653435, second=second -713125493, result=false)))"},{"name":"expected","type":"kotlin.Boolean","value":"false"}],"result":"kotlin.Unit","error":null,"startedAt":"2024-11-18T19:01:08.871043Z","finishedAt":"2024-11-18T19:01:08.872953Z"}],"startedAt":"2024-11-18T19:01:08.861750Z","finishedAt":"2024-11-18T19:01:08.873113Z"}
+{
+  "id": "c190875fe2dc3d983db588f1c7b2b82f4902efa8",
+  "version": 1,
+  "className": "io.github.vooft.pepper.sample.SimplePepperSpec",
+  "name": "my test scenario",
+  "steps": [
+    {
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 0,
+      "name": "generate random string",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "prefix",
+          "type": "kotlin.String",
+          "value": "first"
+        }
+      ],
+      "result": "first -1718802806",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.555410Z",
+      "finishedAt": "2024-11-21T19:30:20.558503Z"
+    },
+    {
+      "id": "76d176eec509112bbf4826f64722a542a2b4eb92",
+      "prefix": "GIVEN",
+      "index": 1,
+      "name": "generate random string",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "prefix",
+          "type": "kotlin.String",
+          "value": "second"
+        }
+      ],
+      "result": "second -1674480112",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.558899Z",
+      "finishedAt": "2024-11-21T19:30:20.562082Z"
+    },
+    {
+      "id": "944007ae5d56a056c754860f21efa03075ae0dab",
+      "prefix": "WHEN",
+      "index": 2,
+      "name": "two strings are compared",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "first",
+          "type": "kotlin.String",
+          "value": "first -1718802806"
+        },
+        {
+          "name": "second",
+          "type": "kotlin.String",
+          "value": "second -1674480112"
+        }
+      ],
+      "result": "CompareResult(first=first -1718802806, second=second -1674480112, result=false)",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.562369Z",
+      "finishedAt": "2024-11-21T19:30:20.564186Z"
+    },
+    {
+      "id": "1cb55f8cec19ed0a01d959a3849b0a46aa230387",
+      "prefix": "THEN",
+      "index": 3,
+      "name": "deep nested compare result is 'false'",
+      "status": "PASSED",
+      "arguments": [
+        {
+          "name": "compareResult",
+          "type": "io.github.vooft.pepper.sample.Holder",
+          "value": "Holder(value=Holder(value=CompareResult(first=first -1718802806, second=second -1674480112, result=false)))"
+        },
+        {
+          "name": "expected",
+          "type": "kotlin.Boolean",
+          "value": "false"
+        }
+      ],
+      "result": "kotlin.Unit",
+      "error": null,
+      "startedAt": "2024-11-21T19:30:20.564607Z",
+      "finishedAt": "2024-11-21T19:30:20.566558Z"
+    }
+  ],
+  "startedAt": "2024-11-21T19:30:20.555236Z",
+  "finishedAt": "2024-11-21T19:30:20.566713Z"
+}
