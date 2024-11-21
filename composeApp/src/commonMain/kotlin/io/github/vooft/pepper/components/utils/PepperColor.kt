@@ -315,18 +315,18 @@ object PepperColor {
     val BlueGrey900 = Color( 0xff263238)
 
     /* White / Black */
-    val white = Color( 0xffffffff)
-    val black = Color( 0xff000000)
+    val White = Color( 0xffffffff)
+    val Black = Color( 0xff000000)
 
     /* Monk skin tone */
-    val monk01 = Color( 0xfff6ede4)
-    val monk02 = Color( 0xfff3e7db)
-    val monk03 = Color( 0xfff7ead0)
-    val monk04 = Color( 0xffeadaba)
-    val monk05 = Color( 0xffd7bd96)
-    val monk06 = Color( 0xffa07e56)
-    val monk07 = Color( 0xff825c43)
-    val monk08 = Color( 0xff604134)
-    val monk09 = Color( 0xff3a312a)
-    val monk10 = Color( 0xff292420)
+    val Monk01 = Color( 0xfff6ede4)
+    val Monk02 = Color( 0xfff3e7db)
+    val Monk03 = Color( 0xfff7ead0)
+    val Monk04 = Color( 0xffeadaba)
+    val Monk05 = Color( 0xffd7bd96)
+    val Monk06 = Color( 0xffa07e56)
+    val Monk07 = Color( 0xff825c43)
+    val Monk08 = Color( 0xff604134)
+    val Monk09 = Color( 0xff3a312a)
+    val Monk10 = Color( 0xff292420)
 }

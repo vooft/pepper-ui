@@ -8,5 +8,5 @@ import io.github.vooft.pepper.preview.PreviewData.aPepperTestScenario
 @Preview
 @Composable
 fun PepperScenarioListItemPreview() {
-    PepperTestScenarioListItem(scenario = aPepperTestScenario())
+    PepperTestScenarioListItem(scenario = aPepperTestScenario(), selected = true)
 }
