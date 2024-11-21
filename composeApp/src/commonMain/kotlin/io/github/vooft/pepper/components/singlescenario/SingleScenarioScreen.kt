@@ -107,7 +107,6 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
                 }
             }
         }
-
     }
 }
 
@@ -194,7 +193,6 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
                     text = argument.value,
                     fontFamily = FontFamily.Monospace
                 )
-
             }
         }
 

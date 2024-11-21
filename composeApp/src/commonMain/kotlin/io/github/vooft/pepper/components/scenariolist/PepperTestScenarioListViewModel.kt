@@ -39,4 +39,3 @@ class PepperTestScenarioListViewModel(private val repository: PepperReportReposi
         data object Loading : ModelState
     }
 }
-
