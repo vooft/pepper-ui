@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.utils.PassFailChip
 import io.github.vooft.pepper.components.utils.PepperColor
 import io.github.vooft.pepper.components.utils.color
+import io.github.vooft.pepper.http.duration
 import io.github.vooft.pepper.reports.api.PepperStepPrefix
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import io.github.vooft.pepper.reports.api.PepperTestStatus
@@ -56,6 +58,14 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
             PassFailChip(status = scenario.status)
             Spacer(modifier = Modifier.width(8.dp))
             Text(text = scenario.name, style = MaterialTheme.typography.h5)
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = scenario.duration.toString(), style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
+            }
         }
 
         Text(text = scenario.className, style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
@@ -130,21 +140,33 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto)
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
-                    modifier = Modifier.weight(6f),
                     text = step.name,
                     style = MaterialTheme.typography.subtitle1,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
 
-                IconButton(
-                    modifier = Modifier
-                        .weight(1f)
-                        .alpha(0.2f)
-                        .rotate(rotationState),
-                    onClick = { expanded = !expanded }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
+                    if (step.status == PepperTestStatus.PASSED) {
+                        Text(
+                            text = step.duration.toString(),
+                            style = MaterialTheme.typography.caption,
+                            color = PepperColor.Grey400
+                        )
+
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+
+                    IconButton(
+                        modifier = Modifier.alpha(0.2f).rotate(rotationState),
+                        onClick = { expanded = !expanded }
+                    ) {
+                        Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
+                    }
                 }
             }
 
