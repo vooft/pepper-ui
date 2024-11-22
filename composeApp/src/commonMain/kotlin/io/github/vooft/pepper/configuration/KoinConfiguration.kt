@@ -2,7 +2,9 @@ package io.github.vooft.pepper.configuration
 
 import io.github.vooft.pepper.http.PepperReportRepository
 import io.github.vooft.pepper.http.ResourcePepperReportRepository
-import io.github.vooft.pepper.model.PepperReportModel
+import io.github.vooft.pepper.model.RootViewModel
+import io.github.vooft.pepper.model.SingleSuiteViewModel
+import io.github.vooft.pepper.model.SuiteSetViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
@@ -37,7 +39,9 @@ fun KoinApplication.koinConfiguration() {
         },
 
         module {
-            viewModel { PepperReportModel(get()) }
+            viewModel { RootViewModel(get()) }
+            viewModel { SuiteSetViewModel(get()) }
+            viewModel { SingleSuiteViewModel(get()) }
         }
     )
 }

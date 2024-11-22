@@ -16,28 +16,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioList
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
-import io.github.vooft.pepper.http.PepperRoot
-import io.github.vooft.pepper.model.PepperReportModel
+import io.github.vooft.pepper.http.LoadablePepperSuite
+import io.github.vooft.pepper.model.SingleSuiteViewModel
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SingleSuiteScreen(modifier: Modifier = Modifier, viewModel: PepperReportModel = koinViewModel(),) {
+fun SingleSuiteScreen(
+    modifier: Modifier = Modifier,
+    suite: LoadablePepperSuite,
+    viewModel: SingleSuiteViewModel = koinViewModel()
+) {
     val viewModelState by viewModel.state.collectAsState()
     when (val state = viewModelState) {
-        PepperReportModel.ModelState.Empty -> {
-            viewModel.loadSuite(PepperRoot.PepperSuiteItem(name = "Report 1", path = "report1"))
+        SingleSuiteViewModel.ModelState.Empty -> {
+            viewModel.loadScenarios(suite)
         }
 
-        PepperReportModel.ModelState.Loading -> {
+        SingleSuiteViewModel.ModelState.Loading -> {
             Text("Loading...")
         }
 
-        is PepperReportModel.ModelState.SuiteLoaded -> {
-            viewModel.loadScenarios(state.suiteItem, state.suite)
-        }
-
-        is PepperReportModel.ModelState.ScenariosLoaded -> {
+        is SingleSuiteViewModel.ModelState.ScenariosLoaded -> {
             var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
             Row(modifier = modifier.fillMaxSize().padding(4.dp)) {
                 SingleSuiteScreenLeftPane(
