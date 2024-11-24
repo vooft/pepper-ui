@@ -68,7 +68,6 @@ fun ReportSuitesStatsScreen(
                 bar = { xIndex, barIndex ->
                     val suite = suites[xIndex]
                     val category = Categories.fromIndex(barIndex)
-                    println("xIndex: $xIndex, barIndex: $barIndex, category: $category, count: ${suite.byCategory(category)}")
 
                     DefaultVerticalBar(
                         brush = SolidColor(Categories.fromIndex(barIndex).color),

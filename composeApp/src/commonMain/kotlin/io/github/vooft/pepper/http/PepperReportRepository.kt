@@ -22,15 +22,17 @@ interface PepperReportRepository {
 suspend fun PepperReportRepository.loadSuites(paths: Collection<SuitePath>): Map<SuitePath, PepperTestSuiteDto> {
     val semaphore = Semaphore(SUITE_LOAD_PARALLELISM)
     return coroutineScope {
-        paths.map {
-            async {
-                semaphore.withPermit {
-                    it to loadSuite(it)
-                }
-            }
-        }
+        paths.map { async { semaphore.withPermit { it to loadSuite(it) } } }
             .awaitAll()
             .toMap()
+    }
+}
+
+suspend fun PepperReportRepository.loadScenarios(path: SuitePath, scenarioIds: Collection<String>): List<PepperTestScenarioDto> {
+    val semaphore = Semaphore(SUITE_LOAD_PARALLELISM)
+    return coroutineScope {
+        scenarioIds.map { async { semaphore.withPermit { loadScenario(path, it) } } }
+            .awaitAll()
     }
 }
 
@@ -54,4 +56,4 @@ data class LoadablePepperSuite(
     val suite: PepperTestSuiteDto
 )
 
-private const val SUITE_LOAD_PARALLELISM = 4
+private const val SUITE_LOAD_PARALLELISM = 10
