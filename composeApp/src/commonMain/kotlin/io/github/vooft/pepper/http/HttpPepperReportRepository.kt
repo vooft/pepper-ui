@@ -1,5 +1,6 @@
 package io.github.vooft.pepper.http
 
+import io.github.vooft.pepper.http.PepperRoot.SuitePath
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import io.github.vooft.pepper.reports.api.PepperTestSuiteDto
 import io.ktor.client.HttpClient
@@ -11,12 +12,12 @@ class HttpPepperReportRepository(private val baseUrl: String, private val client
         return client.get("$baseUrl/$ROOT_JSON").body()
     }
 
-    override suspend fun loadSuite(path: String): PepperTestSuiteDto {
-        return client.get("$baseUrl/$path/$SUITE_JSON").body()
+    override suspend fun loadSuite(path: SuitePath): PepperTestSuiteDto {
+        return client.get("$baseUrl/${path.value}/$SUITE_JSON").body()
     }
 
-    override suspend fun loadScenario(path: String, scenarioId: String): PepperTestScenarioDto {
-        return client.get("$baseUrl/$path/$scenarioId.json").body()
+    override suspend fun loadScenario(path: SuitePath, scenarioId: String): PepperTestScenarioDto {
+        return client.get("$baseUrl/${path.value}/$scenarioId.json").body()
     }
 }
 

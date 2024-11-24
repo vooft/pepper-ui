@@ -2,9 +2,11 @@ package io.github.vooft.pepper.components.singlesuite
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,39 +17,55 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioList
-import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioListViewModel
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
-import io.github.vooft.pepper.http.PepperRoot
+import io.github.vooft.pepper.components.utils.Panel
+import io.github.vooft.pepper.http.LoadablePepperSuite
+import io.github.vooft.pepper.model.SingleSuiteViewModel
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SingleSuiteScreen(modifier: Modifier = Modifier, viewModel: PepperTestScenarioListViewModel = koinViewModel(),) {
-    val viewModelState by viewModel.state.collectAsState()
-    when (val state = viewModelState) {
-        PepperTestScenarioListViewModel.ModelState.Empty -> {
-            viewModel.loadSuite(PepperRoot.PepperSuiteItem(name = "Sample", path = "sample-report"))
-        }
+fun SingleSuiteScreen(modifier: Modifier = Modifier, suite: LoadablePepperSuite, viewModel: SingleSuiteViewModel = koinViewModel()) {
+    Box(modifier = modifier.fillMaxSize()) {
+        val viewModelState by viewModel.state.collectAsState()
+        when (val state = viewModelState) {
+            SingleSuiteViewModel.ModelState.Empty -> {
+                viewModel.loadScenarios(suite)
+            }
 
-        PepperTestScenarioListViewModel.ModelState.Loading -> {
-            Text("Loading...")
-        }
+            SingleSuiteViewModel.ModelState.Loading -> {
+                Text("Loading...")
+            }
 
-        is PepperTestScenarioListViewModel.ModelState.SuiteLoaded -> {
-            viewModel.loadScenarios(state.suiteItem, state.suite)
-        }
+            is SingleSuiteViewModel.ModelState.ScenariosLoaded -> {
+                if (state.suite != suite) {
+                    viewModel.loadScenarios(suite)
+                    return
+                }
 
-        is PepperTestScenarioListViewModel.ModelState.ScenariosLoaded -> {
-            var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
-            Row(modifier = modifier.fillMaxSize().padding(4.dp)) {
-                SingleSuiteScreenLeftPane(
-                    modifier = Modifier.weight(0.3f).fillMaxHeight().padding(4.dp),
-                    scenarios = state.scenarios,
-                    selectedScenario = selectedScenario,
-                    onScenarioClicked = { selectedScenario = it }
-                )
+                var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
+                Row(modifier = Modifier.padding(4.dp)) {
+                    Panel(
+                        modifier = Modifier.weight(0.3f).fillMaxHeight(),
+                        title = "Scenarios"
+                    ) {
+                        SingleSuiteScreenLeftPane(
+                            modifier = Modifier.fillMaxSize(),
+                            scenarios = state.scenarios,
+                            selectedScenario = selectedScenario,
+                            onScenarioClicked = { selectedScenario = it }
+                        )
+                    }
 
-                SingleSuiteScreenRightPane(scenario = selectedScenario, modifier = Modifier.weight(0.7f).fillMaxHeight().padding(4.dp))
+                    Spacer(modifier = Modifier.size(4.dp))
+
+                    Panel(modifier = Modifier.weight(0.7f).fillMaxHeight()) {
+                        SingleSuiteScreenRightPane(
+                            modifier = Modifier.fillMaxSize(),
+                            scenario = selectedScenario
+                        )
+                    }
+                }
             }
         }
     }
