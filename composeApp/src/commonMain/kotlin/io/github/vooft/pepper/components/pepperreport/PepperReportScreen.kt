@@ -20,10 +20,7 @@ import io.github.vooft.pepper.model.SuiteSetViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun PepperReportScreen(
-    suiteItems: Collection<PepperRoot.PepperSuiteItem>,
-    viewModel: SuiteSetViewModel = koinViewModel()
-) {
+fun PepperReportScreen(suiteItems: Collection<PepperRoot.PepperSuiteItem>, viewModel: SuiteSetViewModel = koinViewModel()) {
     val viewModelState by viewModel.state.collectAsState()
     when (val state = viewModelState) {
         SuiteSetViewModel.ModelState.Empty -> {

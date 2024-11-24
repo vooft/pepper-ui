@@ -9,9 +9,7 @@ import io.github.vooft.pepper.model.RootViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun FrontDoorScreen(
-    viewModel: RootViewModel = koinViewModel()
-) {
+fun FrontDoorScreen(viewModel: RootViewModel = koinViewModel()) {
     val viewModelState by viewModel.state.collectAsState()
     when (val state = viewModelState) {
         RootViewModel.ModelState.Empty -> {

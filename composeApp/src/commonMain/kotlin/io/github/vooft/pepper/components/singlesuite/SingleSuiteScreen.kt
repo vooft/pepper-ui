@@ -25,11 +25,7 @@ import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SingleSuiteScreen(
-    modifier: Modifier = Modifier,
-    suite: LoadablePepperSuite,
-    viewModel: SingleSuiteViewModel = koinViewModel()
-) {
+fun SingleSuiteScreen(modifier: Modifier = Modifier, suite: LoadablePepperSuite, viewModel: SingleSuiteViewModel = koinViewModel()) {
     Box(modifier = modifier.fillMaxSize()) {
         val viewModelState by viewModel.state.collectAsState()
         when (val state = viewModelState) {

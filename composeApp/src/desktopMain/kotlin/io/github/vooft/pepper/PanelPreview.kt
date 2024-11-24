@@ -16,7 +16,7 @@ import io.github.vooft.pepper.components.utils.PepperColor
 @Composable
 fun PanelPreview() {
     Box(modifier = Modifier.fillMaxSize().background(PepperColor.Grey100)) {
-        Panel(modifier = Modifier.size(200.dp, 200.dp)){
+        Panel(modifier = Modifier.size(200.dp)) {
             Text("Hello, World!")
         }
     }

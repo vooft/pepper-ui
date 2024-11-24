@@ -207,7 +207,6 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
                     }
                 }
             }
-
         }
 
         val error = step.error
