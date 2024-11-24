@@ -2,9 +2,11 @@ package io.github.vooft.pepper.components.singlesuite
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioList
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
+import io.github.vooft.pepper.components.utils.Panel
 import io.github.vooft.pepper.http.LoadablePepperSuite
 import io.github.vooft.pepper.model.SingleSuiteViewModel
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
@@ -40,14 +43,26 @@ fun SingleSuiteScreen(
         is SingleSuiteViewModel.ModelState.ScenariosLoaded -> {
             var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
             Row(modifier = modifier.fillMaxSize().padding(4.dp)) {
-                SingleSuiteScreenLeftPane(
-                    modifier = Modifier.weight(0.3f).fillMaxHeight().padding(4.dp),
-                    scenarios = state.scenarios,
-                    selectedScenario = selectedScenario,
-                    onScenarioClicked = { selectedScenario = it }
-                )
+                Panel(
+                    modifier = Modifier.weight(0.3f).fillMaxHeight(),
+                    title = "Scenarios"
+                ) {
+                    SingleSuiteScreenLeftPane(
+                        modifier = Modifier.fillMaxSize(),
+                        scenarios = state.scenarios,
+                        selectedScenario = selectedScenario,
+                        onScenarioClicked = { selectedScenario = it }
+                    )
+                }
 
-                SingleSuiteScreenRightPane(scenario = selectedScenario, modifier = Modifier.weight(0.7f).fillMaxHeight().padding(4.dp))
+                Spacer(modifier = Modifier.size(4.dp))
+
+                Panel(modifier = Modifier.weight(0.7f).fillMaxHeight()) {
+                    SingleSuiteScreenRightPane(
+                        modifier = Modifier.fillMaxSize(),
+                        scenario = selectedScenario
+                    )
+                }
             }
         }
     }
