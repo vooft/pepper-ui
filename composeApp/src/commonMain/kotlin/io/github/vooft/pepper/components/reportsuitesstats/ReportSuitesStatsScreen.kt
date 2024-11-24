@@ -1,25 +1,27 @@
 package io.github.vooft.pepper.components.reportsuitesstats
 
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.font.FontWeight
 import io.github.koalaplot.core.bar.DefaultVerticalBar
 import io.github.koalaplot.core.bar.StackedVerticalBarPlot
 import io.github.koalaplot.core.bar.VerticalBarPlotStackedPointEntry
-import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
 import io.github.koalaplot.core.xygraph.CategoryAxisModel
-import io.github.koalaplot.core.xygraph.IntLinearAxisModel
 import io.github.koalaplot.core.xygraph.XYGraph
+import io.github.koalaplot.core.xygraph.rememberIntLinearAxisModel
 import io.github.vooft.pepper.components.utils.HoverSurface
 import io.github.vooft.pepper.components.utils.Panel
 import io.github.vooft.pepper.components.utils.PepperColor
 import io.github.vooft.pepper.http.LoadablePepperSuite
 import io.github.vooft.pepper.reports.api.PepperTestStatus
 
-@OptIn(ExperimentalKoalaPlotApi::class)
 @Composable
 fun ReportSuitesStatsScreen(
     modifier: Modifier = Modifier,
@@ -32,19 +34,33 @@ fun ReportSuitesStatsScreen(
     Panel(modifier = modifier, title = "Test suites statistics") {
         XYGraph(
             modifier = modifier,
-            xAxisModel = CategoryAxisModel(suites.map { it.suiteItem.name }),
-            yAxisModel = IntLinearAxisModel(0..(maxScenarios * 1.5).toInt(), minorTickCount = 0),
+            xAxisTitle = {}, // must be here to pick up the right overload
+            xAxisModel = remember { CategoryAxisModel(List(suites.size) { it }) },
+            xAxisLabels = { index ->
+                val suite = suites[index]
+                Text(
+                    text = suites[index].suiteItem.name,
+                    fontWeight = when {
+                        suite == currentSuite -> FontWeight.Bold
+                        else -> FontWeight.Normal
+                    }
+                )
+            },
+            yAxisModel = rememberIntLinearAxisModel(0..(maxScenarios * 1.5).toInt(), minorTickCount = 0),
+            yAxisLabels = { value -> Text(value.toString()) }
         ) {
             StackedVerticalBarPlot(
-                data = suites.map { suite ->
-                    object : VerticalBarPlotStackedPointEntry<String, Int> {
-                        override val x: String = suite.suiteItem.name
-                        override val yOrigin: Int = 0
-                        override val y: List<Int> = buildList {
-                            var previous = 0
-                            for (category in Categories.entries) {
-                                previous += suite.byCategory(category)
-                                add(previous)
+                data = remember {
+                    suites.mapIndexed { suiteIndex, suite ->
+                        object : VerticalBarPlotStackedPointEntry<Int, Int> {
+                            override val x: Int = suiteIndex
+                            override val yOrigin: Int = 0
+                            override val y: List<Int> = buildList {
+                                var previous = 0
+                                for (category in Categories.entries) {
+                                    previous += suite.byCategory(category)
+                                    add(previous)
+                                }
                             }
                         }
                     }
@@ -56,31 +72,15 @@ fun ReportSuitesStatsScreen(
 
                     DefaultVerticalBar(
                         brush = SolidColor(Categories.fromIndex(barIndex).color),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth().clickable { onSuiteClicked(suite) }
                     ) {
                         HoverSurface {
                             Text("${category.display}: ${suite.byCategory(category)}")
                         }
                     }
-                }
+                },
+                animationSpec = TweenSpec(durationMillis = 0)
             )
-//            StackedVerticalBarPlot {
-//                suites.map {
-//                    series(solidBar(PepperColor.Green)) {
-//                        item(it.suiteItem.name, it.passedCount.toFloat())
-//                    }
-//
-//                    series(solidBar(PepperColor.Red)) {
-//                        item(it.suiteItem.name, it.failedCount.toFloat())
-//                    }
-//
-//                    if (it.skippedCount > 0) {
-//                        series(solidBar(PepperColor.Grey)) {
-//                            item(it.suiteItem.name, it.skippedCount.toFloat())
-//                        }
-//                    }
-//                }
-//            }
         }
     }
 }
