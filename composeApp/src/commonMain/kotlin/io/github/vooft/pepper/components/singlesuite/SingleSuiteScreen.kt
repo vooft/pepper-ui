@@ -30,38 +30,45 @@ fun SingleSuiteScreen(
     suite: LoadablePepperSuite,
     viewModel: SingleSuiteViewModel = koinViewModel()
 ) {
-    val viewModelState by viewModel.state.collectAsState()
-    when (val state = viewModelState) {
-        SingleSuiteViewModel.ModelState.Empty -> {
-            viewModel.loadScenarios(suite)
-        }
+    Box(modifier = modifier.fillMaxSize()) {
+        val viewModelState by viewModel.state.collectAsState()
+        when (val state = viewModelState) {
+            SingleSuiteViewModel.ModelState.Empty -> {
+                viewModel.loadScenarios(suite)
+            }
 
-        SingleSuiteViewModel.ModelState.Loading -> {
-            Text("Loading...")
-        }
+            SingleSuiteViewModel.ModelState.Loading -> {
+                Text("Loading...")
+            }
 
-        is SingleSuiteViewModel.ModelState.ScenariosLoaded -> {
-            var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
-            Row(modifier = modifier.fillMaxSize().padding(4.dp)) {
-                Panel(
-                    modifier = Modifier.weight(0.3f).fillMaxHeight(),
-                    title = "Scenarios"
-                ) {
-                    SingleSuiteScreenLeftPane(
-                        modifier = Modifier.fillMaxSize(),
-                        scenarios = state.scenarios,
-                        selectedScenario = selectedScenario,
-                        onScenarioClicked = { selectedScenario = it }
-                    )
+            is SingleSuiteViewModel.ModelState.ScenariosLoaded -> {
+                if (state.suite != suite) {
+                    viewModel.loadScenarios(suite)
+                    return
                 }
 
-                Spacer(modifier = Modifier.size(4.dp))
+                var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
+                Row(modifier = Modifier.padding(4.dp)) {
+                    Panel(
+                        modifier = Modifier.weight(0.3f).fillMaxHeight(),
+                        title = "Scenarios"
+                    ) {
+                        SingleSuiteScreenLeftPane(
+                            modifier = Modifier.fillMaxSize(),
+                            scenarios = state.scenarios,
+                            selectedScenario = selectedScenario,
+                            onScenarioClicked = { selectedScenario = it }
+                        )
+                    }
 
-                Panel(modifier = Modifier.weight(0.7f).fillMaxHeight()) {
-                    SingleSuiteScreenRightPane(
-                        modifier = Modifier.fillMaxSize(),
-                        scenario = selectedScenario
-                    )
+                    Spacer(modifier = Modifier.size(4.dp))
+
+                    Panel(modifier = Modifier.weight(0.7f).fillMaxHeight()) {
+                        SingleSuiteScreenRightPane(
+                            modifier = Modifier.fillMaxSize(),
+                            scenario = selectedScenario
+                        )
+                    }
                 }
             }
         }
