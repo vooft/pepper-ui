@@ -26,4 +26,4 @@ fun FrontDoorScreen(
     }
 }
 
-private const val LAST_SUITES_DISPLAY = 4
+private const val LAST_SUITES_DISPLAY = 20
