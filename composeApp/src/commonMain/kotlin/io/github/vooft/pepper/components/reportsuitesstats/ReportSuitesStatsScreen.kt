@@ -3,6 +3,8 @@ package io.github.vooft.pepper.components.reportsuitesstats
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -10,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import io.github.koalaplot.core.bar.DefaultVerticalBar
 import io.github.koalaplot.core.bar.StackedVerticalBarPlot
 import io.github.koalaplot.core.bar.VerticalBarPlotStackedPointEntry
@@ -39,11 +43,15 @@ fun ReportSuitesStatsScreen(
             xAxisLabels = { index ->
                 val suite = suites[index]
                 Text(
-                    text = suites[index].suiteItem.name,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                    text = suite.suiteItem.name,
                     fontWeight = when {
                         suite == currentSuite -> FontWeight.Bold
                         else -> FontWeight.Normal
-                    }
+                    },
+                    color = MaterialTheme.colors.onBackground,
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center
                 )
             },
             yAxisModel = rememberIntLinearAxisModel(0..(maxScenarios * 1.5).toInt(), minorTickCount = 0),

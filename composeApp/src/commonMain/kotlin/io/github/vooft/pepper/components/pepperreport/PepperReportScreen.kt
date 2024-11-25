@@ -37,7 +37,7 @@ fun PepperReportScreen(suiteItems: Collection<PepperRoot.PepperSuiteItem>, viewM
                 return
             }
 
-            var currentSuite by remember { mutableStateOf(state.suites.first()) }
+            var currentSuite by remember { mutableStateOf(state.suites.last()) }
 
             Column(modifier = Modifier.fillMaxSize()) {
                 ReportSuitesStatsScreen(
