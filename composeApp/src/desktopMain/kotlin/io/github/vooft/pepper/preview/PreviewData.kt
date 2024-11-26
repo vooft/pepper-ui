@@ -12,7 +12,7 @@ object PreviewData {
     private val counter = atomic(0)
 
     fun aPepperTestScenario() = PepperTestScenarioDto(
-        id = "${counter.incrementAndGet()}",
+        id = PepperTestScenarioDto.ScenarioId(counter.incrementAndGet().toString()),
         name = "Test scenario ${counter.incrementAndGet()}",
         className = "io.github.vooft.pepper.TestScenario",
         version = 1,
@@ -20,7 +20,7 @@ object PreviewData {
         finishedAt = Clock.System.now(),
         steps = listOf(
             PepperTestStepDto(
-                id = "${counter.incrementAndGet()}",
+                id = PepperTestStepDto.StepId(counter.incrementAndGet().toString()),
                 index = 0,
                 prefix = PepperStepPrefix.GIVEN,
                 status = PepperTestStatus.PASSED,
