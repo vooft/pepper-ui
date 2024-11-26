@@ -17,8 +17,8 @@ class HttpPepperReportRepository(private val baseUrl: String, private val client
         return client.get("$baseUrl/${path.value}/$SUITE_JSON").body()
     }
 
-    override suspend fun loadScenario(path: SuitePath, scenarioId: String): PepperTestScenarioDto {
-        return client.get("$baseUrl/${path.value}/$scenarioId.json").body()
+    override suspend fun loadScenario(path: SuitePath, scenarioId: PepperTestScenarioDto.ScenarioId): PepperTestScenarioDto {
+        return client.get("$baseUrl/${path.value}/${scenarioId.value}.json").body()
     }
 }
 

@@ -2,6 +2,7 @@ package io.github.vooft.pepper.http
 
 import io.github.vooft.pepper.http.PepperRoot.SuitePath
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto.ScenarioId
 import io.github.vooft.pepper.reports.api.PepperTestSuiteDto
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -21,8 +22,8 @@ class ResourcePepperReportRepository : PepperReportRepository {
         return Json.decodeFromString(json)
     }
 
-    override suspend fun loadScenario(path: SuitePath, scenarioId: String): PepperTestScenarioDto {
-        val json = Res.readBytes("files/pepper-suites/${path.value}/$scenarioId.json").decodeToString()
+    override suspend fun loadScenario(path: SuitePath, scenarioId: ScenarioId): PepperTestScenarioDto {
+        val json = Res.readBytes("files/pepper-suites/${path.value}/${scenarioId.value}.json").decodeToString()
         println("scenario: $json")
         return Json.decodeFromString(json)
     }

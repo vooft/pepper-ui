@@ -2,6 +2,7 @@ package io.github.vooft.pepper.http
 
 import io.github.vooft.pepper.http.PepperRoot.SuitePath
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto.ScenarioId
 import io.github.vooft.pepper.reports.api.PepperTestSuiteDto
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -16,7 +17,7 @@ interface PepperReportRepository {
 
     suspend fun loadSuite(path: SuitePath): PepperTestSuiteDto
 
-    suspend fun loadScenario(path: SuitePath, scenarioId: String): PepperTestScenarioDto
+    suspend fun loadScenario(path: SuitePath, scenarioId: ScenarioId): PepperTestScenarioDto
 }
 
 suspend fun PepperReportRepository.loadSuites(paths: Collection<SuitePath>): Map<SuitePath, PepperTestSuiteDto> {
@@ -28,7 +29,7 @@ suspend fun PepperReportRepository.loadSuites(paths: Collection<SuitePath>): Map
     }
 }
 
-suspend fun PepperReportRepository.loadScenarios(path: SuitePath, scenarioIds: Collection<String>): List<PepperTestScenarioDto> {
+suspend fun PepperReportRepository.loadScenarios(path: SuitePath, scenarioIds: Collection<ScenarioId>): List<PepperTestScenarioDto> {
     val semaphore = Semaphore(SUITE_LOAD_PARALLELISM)
     return coroutineScope {
         scenarioIds.map { async { semaphore.withPermit { loadScenario(path, it) } } }
