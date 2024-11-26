@@ -43,7 +43,7 @@ fun ReportSuitesStatsScreen(
             xAxisLabels = { index ->
                 val suite = suites[index]
                 Text(
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp).clickable { onSuiteClicked(suite) },
                     text = suite.suiteItem.name,
                     fontWeight = when {
                         suite == currentSuite -> FontWeight.Bold
