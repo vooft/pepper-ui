@@ -16,7 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioList
+import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioTree
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
 import io.github.vooft.pepper.components.utils.Panel
 import io.github.vooft.pepper.http.LoadablePepperSuite
@@ -78,10 +78,14 @@ private fun SingleSuiteScreenLeftPane(
     selectedScenario: PepperTestScenarioDto?,
     onScenarioClicked: (PepperTestScenarioDto) -> Unit
 ) {
-    PepperTestScenarioList(
-        modifier = modifier,
+//    PepperTestScenarioList(
+//        modifier = modifier,
+//        scenarios = scenarios,
+//        selectedScenario = selectedScenario,
+//        onScenarioClicked = onScenarioClicked
+//    )
+    PepperTestScenarioTree(
         scenarios = scenarios,
-        selectedScenario = selectedScenario,
         onScenarioClicked = onScenarioClicked
     )
 }
