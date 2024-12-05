@@ -22,7 +22,7 @@ fun Panel(modifier: Modifier = Modifier, title: String? = null, content: @Compos
     ) {
         Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
             if (title != null) {
-                Text(title, style = MaterialTheme.typography.h6)
+                Text(title, style = MaterialTheme.typography.h4)
                 Divider()
             }
 

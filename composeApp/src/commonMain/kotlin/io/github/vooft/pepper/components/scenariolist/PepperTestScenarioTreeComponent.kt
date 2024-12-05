@@ -2,6 +2,7 @@ package io.github.vooft.pepper.components.scenariolist
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -17,7 +18,9 @@ fun PepperTestScenarioTreeComponent(
     onScenarioClicked: (PepperTestScenarioDto) -> Unit
 ) {
     val tree = PepperScenarioTree(scenarios = scenarios, selectedScenarioId = selectedScenario.id)
-    tree.expandAll()
+
+    // expand tree on startup
+    LaunchedEffect(Unit) { tree.expandAll() }
 
     TreeView(
         modifier = modifier,
