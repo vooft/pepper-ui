@@ -24,9 +24,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Cancel
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,8 +39,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.utils.PassFailChip
+import io.github.vooft.pepper.components.utils.PassFailIcon
 import io.github.vooft.pepper.components.utils.PepperColor
-import io.github.vooft.pepper.components.utils.color
 import io.github.vooft.pepper.http.duration
 import io.github.vooft.pepper.reports.api.PepperStepPrefix
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
@@ -130,15 +127,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto)
             modifier = Modifier.padding(horizontal = 4.dp).clickable { expanded = !expanded },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = when (step.status) {
-                    PepperTestStatus.PASSED -> Icons.Default.Check
-                    PepperTestStatus.FAILED -> Icons.Default.Close
-                    PepperTestStatus.SKIPPED -> Icons.Default.Cancel
-                },
-                contentDescription = null,
-                tint = step.status.color
-            )
+            PassFailIcon(status = step.status)
 
             Spacer(modifier = Modifier.width(8.dp))
 

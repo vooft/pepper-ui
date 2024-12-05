@@ -1,37 +1,65 @@
 package io.github.vooft.pepper.components.scenariolist
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import io.github.vooft.compose.treeview.core.node.Branch
 import io.github.vooft.compose.treeview.core.node.Leaf
 import io.github.vooft.compose.treeview.core.tree.Tree
 import io.github.vooft.compose.treeview.core.tree.TreeScope
+import io.github.vooft.pepper.components.utils.PassFailIcon
+import io.github.vooft.pepper.components.utils.PepperColor
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
+import io.github.vooft.pepper.reports.api.PepperTestScenarioDto.ScenarioId
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto.ScenarioTag
+import io.github.vooft.pepper.reports.api.status
 
 @Composable
-fun PepperScenarioTreeModel(scenarios: List<PepperTestScenarioDto>): Tree<PepperScenarioNode> = Tree {
+fun PepperScenarioTree(scenarios: List<PepperTestScenarioDto>, selectedScenarioId: ScenarioId): Tree<PepperScenarioNode> = Tree {
     for (node in PepperScenarioNode.create(scenarios)) {
-        PepperTreeNode(node)
+        PepperTreeNode(node, selectedScenarioId)
     }
 }
 
 @Composable
-fun TreeScope.PepperTreeNode(node: PepperScenarioNode) {
+fun TreeScope.PepperTreeNode(node: PepperScenarioNode, selectedScenarioId: ScenarioId) {
     when (node) {
         is PepperScenarioNode.ScenarioNode -> {
             Leaf(
                 content = node,
-                name = node.scenario.name
+                name = node.scenario.name,
+                customName = {
+                    Text(
+                        text = node.scenario.name,
+                        style = when (node.scenario.id) {
+                            selectedScenarioId -> TextStyle.Default.copy(fontWeight = FontWeight.Bold)
+                            else -> TextStyle.Default
+                        },
+                        modifier = Modifier
+                    )
+                },
+                customIcon = {
+                    PassFailIcon(status = node.scenario.status)
+                }
             )
         }
 
         is PepperScenarioNode.TagNode -> {
             Branch(
                 content = node,
-                name = node.tag.value
+                name = node.tag.value,
+                customName = {
+                    Text(
+                        text = node.tag.value,
+                        style = TextStyle.Default.copy(color = PepperColor.Grey600),
+                        modifier = Modifier
+                    )
+                }
             ) {
                 for (child in node.children) {
-                    PepperTreeNode(child)
+                    PepperTreeNode(child, selectedScenarioId)
                 }
             }
         }
