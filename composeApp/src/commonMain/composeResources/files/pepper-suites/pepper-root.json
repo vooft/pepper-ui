@@ -19,6 +19,10 @@
     {
       "name": "Report 5",
       "path": "report5"
+    },
+    {
+      "name": "Report 6",
+      "path": "report6"
     }
   ]
 }

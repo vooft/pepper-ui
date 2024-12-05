@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import io.github.vooft.pepper.components.utils.PassFailChip
 import io.github.vooft.pepper.components.utils.PassFailIcon
 import io.github.vooft.pepper.components.utils.PepperColor
+import io.github.vooft.pepper.components.utils.toReadableString
 import io.github.vooft.pepper.http.duration
 import io.github.vooft.pepper.reports.api.PepperStepPrefix
 import io.github.vooft.pepper.reports.api.PepperTestScenarioDto
@@ -67,7 +68,7 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = scenario.duration.toString(), style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
+                Text(text = scenario.duration.toReadableString(), style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
             }
         }
 
@@ -145,8 +146,9 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto)
             ) {
                 if (step.status == PepperTestStatus.PASSED) {
                     Text(
-                        text = step.duration.toString(),
+                        text = step.duration.toReadableString(),
                         style = MaterialTheme.typography.caption,
+                        maxLines = 1,
                         color = PepperColor.Grey400
                     )
 
