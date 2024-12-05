@@ -16,7 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioList
+import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioTreeComponent
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
 import io.github.vooft.pepper.components.utils.Panel
 import io.github.vooft.pepper.http.LoadablePepperSuite
@@ -43,27 +43,31 @@ fun SingleSuiteScreen(modifier: Modifier = Modifier, suite: LoadablePepperSuite,
                     return
                 }
 
-                var selectedScenario by remember { mutableStateOf(state.scenarios.firstOrNull()) }
-                Row(modifier = Modifier.padding(4.dp)) {
-                    Panel(
-                        modifier = Modifier.weight(0.3f).fillMaxHeight(),
-                        title = "Scenarios"
-                    ) {
-                        SingleSuiteScreenLeftPane(
-                            modifier = Modifier.fillMaxSize(),
-                            scenarios = state.scenarios,
-                            selectedScenario = selectedScenario,
-                            onScenarioClicked = { selectedScenario = it }
-                        )
-                    }
+                if (state.scenarios.isEmpty()) {
+                    Text("No scenarios found")
+                } else {
+                    var selectedScenario by remember { mutableStateOf(state.scenarios.first()) }
+                    Row(modifier = Modifier.padding(4.dp)) {
+                        Panel(
+                            modifier = Modifier.weight(0.3f).fillMaxHeight(),
+                            title = "Scenarios"
+                        ) {
+                            SingleSuiteScreenLeftPane(
+                                modifier = Modifier.fillMaxSize(),
+                                scenarios = state.scenarios,
+                                selectedScenario = selectedScenario,
+                                onScenarioClicked = { selectedScenario = it }
+                            )
+                        }
 
-                    Spacer(modifier = Modifier.size(4.dp))
+                        Spacer(modifier = Modifier.size(4.dp))
 
-                    Panel(modifier = Modifier.weight(0.7f).fillMaxHeight()) {
-                        SingleSuiteScreenRightPane(
-                            modifier = Modifier.fillMaxSize(),
-                            scenario = selectedScenario
-                        )
+                        Panel(modifier = Modifier.weight(0.7f).fillMaxHeight()) {
+                            SingleSuiteScreenRightPane(
+                                modifier = Modifier.fillMaxSize(),
+                                scenario = selectedScenario
+                            )
+                        }
                     }
                 }
             }
@@ -75,10 +79,10 @@ fun SingleSuiteScreen(modifier: Modifier = Modifier, suite: LoadablePepperSuite,
 private fun SingleSuiteScreenLeftPane(
     modifier: Modifier = Modifier,
     scenarios: List<PepperTestScenarioDto>,
-    selectedScenario: PepperTestScenarioDto?,
+    selectedScenario: PepperTestScenarioDto,
     onScenarioClicked: (PepperTestScenarioDto) -> Unit
 ) {
-    PepperTestScenarioList(
+    PepperTestScenarioTreeComponent(
         modifier = modifier,
         scenarios = scenarios,
         selectedScenario = selectedScenario,

@@ -49,6 +49,7 @@ fun ReportSuitesStatsScreen(
                         suite == currentSuite -> FontWeight.Bold
                         else -> FontWeight.Normal
                     },
+                    fontSize = MaterialTheme.typography.caption.fontSize,
                     color = MaterialTheme.colors.onBackground,
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center

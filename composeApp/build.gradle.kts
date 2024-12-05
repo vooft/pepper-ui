@@ -61,6 +61,8 @@ kotlin {
             implementation(libs.material.kolor)
             implementation(libs.koalaplot.core)
 
+            implementation(libs.compose.treeview.core)
+
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.kotlinx.serialization.json)
