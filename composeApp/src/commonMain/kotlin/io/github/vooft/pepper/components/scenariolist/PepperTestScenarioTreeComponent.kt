@@ -17,7 +17,7 @@ fun PepperTestScenarioTreeComponent(
     selectedScenario: PepperTestScenarioDto,
     onScenarioClicked: (PepperTestScenarioDto) -> Unit
 ) {
-    val tree = PepperScenarioTree(scenarios = scenarios, selectedScenarioId = selectedScenario.id)
+    val tree = PepperTestScenarioTree(scenarios = scenarios, selectedScenarioId = selectedScenario.id)
 
     // expand tree on startup
     LaunchedEffect(Unit) { tree.expandAll() }

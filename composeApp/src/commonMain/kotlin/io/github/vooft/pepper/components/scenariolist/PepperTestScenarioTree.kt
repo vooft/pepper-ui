@@ -17,7 +17,7 @@ import io.github.vooft.pepper.reports.api.PepperTestScenarioDto.ScenarioTag
 import io.github.vooft.pepper.reports.api.status
 
 @Composable
-fun PepperScenarioTree(scenarios: List<PepperTestScenarioDto>, selectedScenarioId: ScenarioId): Tree<PepperScenarioNode> = Tree {
+fun PepperTestScenarioTree(scenarios: List<PepperTestScenarioDto>, selectedScenarioId: ScenarioId): Tree<PepperScenarioNode> = Tree {
     for (node in PepperScenarioNode.create(scenarios)) {
         PepperTreeNode(node, selectedScenarioId)
     }
@@ -67,8 +67,16 @@ fun TreeScope.PepperTreeNode(node: PepperScenarioNode, selectedScenarioId: Scena
 }
 
 sealed interface PepperScenarioNode {
-    data class TagNode(val tag: ScenarioTag, val children: List<PepperScenarioNode>) : PepperScenarioNode
-    data class ScenarioNode(val scenario: PepperTestScenarioDto) : PepperScenarioNode
+
+    val name: String
+
+    data class TagNode(val tag: ScenarioTag, val children: List<PepperScenarioNode>) : PepperScenarioNode {
+        override val name: String get() = tag.value
+    }
+
+    data class ScenarioNode(val scenario: PepperTestScenarioDto) : PepperScenarioNode {
+        override val name: String get() = scenario.name
+    }
 
     companion object {
         fun create(scenarios: List<PepperTestScenarioDto>): List<PepperScenarioNode> {
@@ -92,7 +100,7 @@ private class TagTrie {
             val children = children.values.map { it.toPepperScenarioNode() }
             val scenarios = scenarios.map { PepperScenarioNode.ScenarioNode(it) }
 
-            return PepperScenarioNode.TagNode(tag, children + scenarios)
+            return PepperScenarioNode.TagNode(tag, (children + scenarios).sortedBy { it.name })
         }
     }
 
@@ -111,7 +119,11 @@ private class TagTrie {
         current.scenarios.add(scenario)
     }
 
-    fun toPepperScenarioNodes(): List<PepperScenarioNode> {
-        return rootTags.values.map { it.toPepperScenarioNode() } + uncategorized.toPepperScenarioNode()
+    fun toPepperScenarioNodes(): List<PepperScenarioNode> = buildList {
+        if (uncategorized.scenarios.isNotEmpty()) {
+            add(uncategorized.toPepperScenarioNode())
+        }
+
+        addAll(rootTags.values.sortedBy { it.tag.value }.map { it.toPepperScenarioNode() })
     }
 }
