@@ -5,7 +5,7 @@ android-minSdk = "24"
 android-targetSdk = "34"
 androidx-lifecycle = "2.8.4"
 kotlin = "2.1.0"
-koin = "4.0.0"
+koin = "4.0.1"
 ktor = "3.0.1"
 
 [libraries]
