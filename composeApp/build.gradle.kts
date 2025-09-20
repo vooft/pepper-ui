@@ -82,11 +82,11 @@ kotlin {
 
 android {
     namespace = "io.github.vooft"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "io.github.vooft"
-        minSdk = 21
+        minSdk = 23
     }
     packaging {
         resources {
