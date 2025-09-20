@@ -16,7 +16,7 @@ kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.7.3" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.1" }
 material-kolor = { module = "com.materialkolor:material-kolor", version = "2.0.2" }
-koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version = "0.7.1" }
+koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version = "0.9.1" }
 
 pepper-bdd-reports-api = { module = "io.github.vooft:pepper-bdd-reports-api", version = "0.3.0" }
 compose-treeview-core = { module = "io.github.vooft:compose-treeview-core", version = "0.1.0" }
