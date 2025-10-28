@@ -18,7 +18,7 @@ koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version = "0.9
 pepper-bdd-reports-api = { module = "io.github.vooft:pepper-bdd-reports-api", version = "0.4.1" }
 compose-treeview-core = { module = "io.github.vooft:compose-treeview-core", version = "0.3.0" }
 
-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.9.4" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.9.5" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version = "2.9.0" }
 
 koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
