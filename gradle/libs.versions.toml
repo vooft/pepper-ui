@@ -19,7 +19,7 @@ pepper-bdd-reports-api = { module = "io.github.vooft:pepper-bdd-reports-api", ve
 compose-treeview-core = { module = "io.github.vooft:compose-treeview-core", version = "0.3.0" }
 
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.9.5" }
-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version = "2.9.0" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version = "2.9.1" }
 
 koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
 
