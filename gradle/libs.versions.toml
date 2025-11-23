@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.3"
+agp = "8.13.1"
 androidx-lifecycle = "2.9.6"
 kotlin = "2.2.21"
 koin = "4.1.1"
