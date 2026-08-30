@@ -2,7 +2,7 @@
 agp = "9.3.2"
 androidx-lifecycle = "2.9.6"
 kotlin = "2.4.10"
-koin = "4.1.1"
+koin = "4.2.2"
 ktor = "3.3.3"
 
 [libraries]
