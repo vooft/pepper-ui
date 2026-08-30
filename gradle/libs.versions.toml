@@ -3,13 +3,15 @@ agp = "9.3.2"
 compose-multiplatform = "1.12.0"
 androidx-lifecycle = "2.9.6"
 kotlin = "2.4.10"
+# material3 is versioned independently of Compose Multiplatform; material-kolor already pulls this version in
+compose-material3 = "1.11.0-alpha07"
 koin = "4.2.2"
 ktor = "3.5.2"
 
 [libraries]
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-multiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-multiplatform" }
-compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "compose-multiplatform" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-material3" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-multiplatform" }
 compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose-multiplatform" }
 compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-multiplatform" }

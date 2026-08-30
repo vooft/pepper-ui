@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -38,7 +38,6 @@ fun PepperTestScenarioList(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PepperTestScenarioListItem(
     modifier: Modifier = Modifier,
@@ -47,18 +46,18 @@ fun PepperTestScenarioListItem(
     onClicked: () -> Unit = {}
 ) {
     Card(
-        backgroundColor = scenario.status.color.lighten(),
+        onClick = onClicked,
+        modifier = modifier,
+        colors = CardDefaults.cardColors(containerColor = scenario.status.color.lighten()),
         border = when (selected) {
             true -> BorderStroke(3.dp, PepperColor.Black)
             false -> null
         },
-        modifier = modifier,
-        onClick = onClicked,
     ) {
         Column(
             modifier = modifier.padding(8.dp)
         ) {
-            Text(text = scenario.name, style = MaterialTheme.typography.subtitle2)
+            Text(text = scenario.name, style = MaterialTheme.typography.labelMedium)
         }
     }
 }

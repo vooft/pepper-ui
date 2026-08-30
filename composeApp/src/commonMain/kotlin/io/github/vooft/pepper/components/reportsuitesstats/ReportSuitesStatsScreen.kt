@@ -4,8 +4,8 @@ import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -50,9 +50,9 @@ fun ReportSuitesStatsScreen(
                         suite == currentSuite -> FontWeight.Bold
                         else -> FontWeight.Normal
                     },
-                    fontSize = MaterialTheme.typography.caption.fontSize,
-                    color = MaterialTheme.colors.onBackground,
-                    style = MaterialTheme.typography.body2,
+                    fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Center
                 )
             },

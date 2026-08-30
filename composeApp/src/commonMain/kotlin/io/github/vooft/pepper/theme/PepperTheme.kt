@@ -1,13 +1,9 @@
 package io.github.vooft.pepper.theme
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
 @Composable
 fun PepperTheme(content: @Composable () -> Unit) {
-    MaterialTheme(
-        typography = PepperTypography()
-    ) {
-        content()
-    }
+    MaterialTheme(content = content)
 }
