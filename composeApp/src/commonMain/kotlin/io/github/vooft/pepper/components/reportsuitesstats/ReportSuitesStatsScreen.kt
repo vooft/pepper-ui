@@ -2,10 +2,14 @@ package io.github.vooft.pepper.components.reportsuitesstats
 
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TooltipAnchorPosition
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -20,6 +24,7 @@ import io.github.koalaplot.core.bar.StackedVerticalBarPlot
 import io.github.koalaplot.core.bar.VerticalBarPlotStackedPointEntry
 import io.github.koalaplot.core.xygraph.CategoryAxisModel
 import io.github.koalaplot.core.xygraph.XYGraph
+import io.github.koalaplot.core.xygraph.rememberAxisContent
 import io.github.koalaplot.core.xygraph.rememberIntLinearAxisModel
 import io.github.vooft.pepper.components.utils.HoverSurface
 import io.github.vooft.pepper.components.utils.Panel
@@ -39,25 +44,26 @@ fun ReportSuitesStatsScreen(
     Panel(modifier = modifier, title = "Test suites statistics") {
         XYGraph(
             modifier = modifier,
-            xAxisTitle = {}, // must be here to pick up the right overload
             xAxisModel = remember { CategoryAxisModel(List(suites.size) { it }) },
-            xAxisLabels = { index ->
-                val suite = suites[index]
-                Text(
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp).clickable { onSuiteClicked(suite) },
-                    text = suite.suiteItem.name,
-                    fontWeight = when {
-                        suite == currentSuite -> FontWeight.Bold
-                        else -> FontWeight.Normal
-                    },
-                    fontSize = MaterialTheme.typography.labelSmall.fontSize,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.bodySmall,
-                    textAlign = TextAlign.Center
-                )
-            },
+            xAxisContent = rememberAxisContent(
+                labels = { index ->
+                    val suite = suites[index]
+                    Text(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp).clickable { onSuiteClicked(suite) },
+                        text = suite.suiteItem.name,
+                        fontWeight = when {
+                            suite == currentSuite -> FontWeight.Bold
+                            else -> FontWeight.Normal
+                        },
+                        fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.bodySmall,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            ),
             yAxisModel = rememberIntLinearAxisModel(0..(maxScenarios * 1.5).toInt(), minorTickCount = 0),
-            yAxisLabels = { value -> Text(value.toString()) }
+            yAxisContent = rememberAxisContent(labels = { value -> Text(value.toString()) })
         ) {
             StackedVerticalBarPlot(
                 data = remember {
@@ -79,13 +85,20 @@ fun ReportSuitesStatsScreen(
                     val suite = suites[xIndex]
                     val category = Categories.fromIndex(barIndex)
 
-                    DefaultBar(
-                        brush = SolidColor(Categories.fromIndex(barIndex).color),
-                        modifier = Modifier.fillMaxWidth().clickable { onSuiteClicked(suite) }
-                    ) {
-                        HoverSurface {
-                            Text("${category.display}: ${suite.byCategory(category)}")
+                    TooltipBox(
+                        modifier = Modifier.fillMaxSize(),
+                        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
+                        state = rememberTooltipState(),
+                        tooltip = {
+                            HoverSurface {
+                                Text("${category.display}: ${suite.byCategory(category)}")
+                            }
                         }
+                    ) {
+                        DefaultBar(
+                            brush = SolidColor(category.color),
+                            modifier = Modifier.fillMaxSize().clickable { onSuiteClicked(suite) }
+                        )
                     }
                 },
                 startAnimationUseCase = StartAnimationUseCase(
