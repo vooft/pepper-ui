@@ -1,11 +1,10 @@
 package io.github.vooft.pepper.configuration
 
-import io.ktor.http.URLBuilder
-import io.ktor.http.appendPathSegments
-import kotlinx.browser.window
+import pepper_ui.composeapp.generated.resources.Res
 
-// actual fun reportsBaseUrl(): String = "https://vooft.github.io/pepper-bdd/"
+// actual fun reportsBaseUrl(): String = "https://vooft.github.io/pepper-bdd/pepper-reports"
 
-actual fun reportsBaseUrl(): String = URLBuilder(window.location.toString())
-    .appendPathSegments("pepper-reports")
-    .buildString()
+// the reports are bundled as compose resources, so they are served by the webpack dev server as well
+actual fun reportsBaseUrl(): String = Res.getUri(REPORTS_PATH).replace("/./", "/")
+
+private const val REPORTS_PATH = "files/pepper-suites"
