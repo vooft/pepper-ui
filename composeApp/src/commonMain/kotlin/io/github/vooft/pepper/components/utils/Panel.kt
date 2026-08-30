@@ -4,10 +4,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,13 +18,13 @@ import androidx.compose.ui.unit.dp
 fun Panel(modifier: Modifier = Modifier, title: String? = null, content: @Composable () -> Unit) {
     Card(
         modifier = modifier.padding(4.dp),
-        elevation = 4.dp,
-        backgroundColor = Color.White
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
             if (title != null) {
-                Text(title, style = MaterialTheme.typography.h4)
-                Divider()
+                Text(title, style = MaterialTheme.typography.titleLarge)
+                HorizontalDivider()
             }
 
             Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {

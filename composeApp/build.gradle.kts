@@ -41,7 +41,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
-            implementation(libs.compose.material)
+            implementation(libs.compose.material3)
             implementation(libs.compose.material.icons.extended)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
@@ -67,6 +67,13 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.pepper.bdd.reports.api)
+        }
+        val desktopTest by getting
+        desktopTest.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(kotlin("test"))
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

@@ -16,14 +16,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -60,7 +61,7 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
             Spacer(modifier = Modifier.width(8.dp))
 
             SelectionContainer {
-                Text(text = scenario.name, style = MaterialTheme.typography.button)
+                Text(text = scenario.name, style = MaterialTheme.typography.labelMedium)
             }
 
             Row(
@@ -68,15 +69,15 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = scenario.duration.toReadableString(), style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
+                Text(text = scenario.duration.toReadableString(), style = MaterialTheme.typography.labelSmall, color = PepperColor.Grey400)
             }
         }
 
         SelectionContainer {
-            Text(text = scenario.className, style = MaterialTheme.typography.caption, color = PepperColor.Grey400)
+            Text(text = scenario.className, style = MaterialTheme.typography.labelSmall, color = PepperColor.Grey400)
         }
 
-        Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), thickness = 3.dp)
+        HorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), thickness = 3.dp)
 
         val stepsByPrefix = buildList {
             var currentPrefix = scenario.steps.first().prefix
@@ -96,11 +97,14 @@ fun SingleScenarioScreen(modifier: Modifier = Modifier, scenario: PepperTestScen
         }
 
         for ((prefix, steps) in stepsByPrefix) {
-            Card(modifier = Modifier.padding(vertical = 4.dp), backgroundColor = PepperColor.Grey800) {
+            Card(
+                modifier = Modifier.padding(vertical = 4.dp),
+                colors = CardDefaults.cardColors(containerColor = PepperColor.Grey800)
+            ) {
                 Column {
                     Text(
                         text = prefix.name,
-                        style = MaterialTheme.typography.h6,
+                        style = MaterialTheme.typography.titleSmall,
                         color = PepperColor.Grey400,
                         modifier = Modifier.padding(8.dp)
                     )
@@ -134,7 +138,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto)
 
             Text(
                 text = step.name,
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.titleSmall,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -147,7 +151,7 @@ private fun ScenarioStep(modifier: Modifier = Modifier, step: PepperTestStepDto)
                 if (step.status == PepperTestStatus.PASSED) {
                     Text(
                         text = step.duration.toReadableString(),
-                        style = MaterialTheme.typography.caption,
+                        style = MaterialTheme.typography.labelSmall,
                         maxLines = 1,
                         color = PepperColor.Grey400
                     )
@@ -175,7 +179,7 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
     Column(modifier = modifier) {
         if (step.arguments.isNotEmpty()) {
             Column(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
-                Text("Arguments:", style = MaterialTheme.typography.h6)
+                Text("Arguments:", style = MaterialTheme.typography.titleSmall)
 
                 for (argument in step.arguments) {
                     Row(modifier = Modifier.fillMaxWidth()) {
@@ -203,7 +207,7 @@ private fun PepperTestStepExpand(modifier: Modifier = Modifier, step: PepperTest
         val error = step.error
         if (error != null) {
             Column(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
-                Text("Error:", style = MaterialTheme.typography.h6)
+                Text("Error:", style = MaterialTheme.typography.titleSmall)
 
                 var stacktraceExpanded by remember { mutableStateOf(false) }
                 Text(
