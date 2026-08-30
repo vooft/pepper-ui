@@ -11,10 +11,10 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         namespace = "io.github.vooft.pepper"
-        compileSdk = 36
-        minSdk = 23
+        compileSdk = 37
+        minSdk = 24
 
         // required so Compose Multiplatform resources from commonMain are packaged into the APK
         androidResources.enable = true
