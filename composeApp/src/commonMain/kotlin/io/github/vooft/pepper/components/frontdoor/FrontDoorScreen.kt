@@ -15,9 +15,11 @@ fun FrontDoorScreen(viewModel: RootViewModel = koinViewModel()) {
         RootViewModel.ModelState.Empty -> {
             viewModel.loadRoot()
         }
+
         RootViewModel.ModelState.Loading -> {
             Text("Loading...")
         }
+
         is RootViewModel.ModelState.RootLoaded -> {
             PepperReportScreen(suiteItems = state.root.suites.takeLast(LAST_SUITES_DISPLAY))
         }
