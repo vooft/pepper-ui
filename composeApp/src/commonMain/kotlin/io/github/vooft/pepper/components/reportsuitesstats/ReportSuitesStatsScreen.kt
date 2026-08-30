@@ -14,7 +14,8 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import io.github.koalaplot.core.bar.DefaultVerticalBar
+import io.github.koalaplot.core.animation.StartAnimationUseCase
+import io.github.koalaplot.core.bar.DefaultBar
 import io.github.koalaplot.core.bar.StackedVerticalBarPlot
 import io.github.koalaplot.core.bar.VerticalBarPlotStackedPointEntry
 import io.github.koalaplot.core.xygraph.CategoryAxisModel
@@ -74,11 +75,11 @@ fun ReportSuitesStatsScreen(
                         }
                     }
                 },
-                bar = { xIndex, barIndex ->
+                bar = { xIndex, barIndex, _ ->
                     val suite = suites[xIndex]
                     val category = Categories.fromIndex(barIndex)
 
-                    DefaultVerticalBar(
+                    DefaultBar(
                         brush = SolidColor(Categories.fromIndex(barIndex).color),
                         modifier = Modifier.fillMaxWidth().clickable { onSuiteClicked(suite) }
                     ) {
@@ -87,7 +88,11 @@ fun ReportSuitesStatsScreen(
                         }
                     }
                 },
-                animationSpec = TweenSpec(durationMillis = 0)
+                startAnimationUseCase = StartAnimationUseCase(
+                    executionType = StartAnimationUseCase.ExecutionType.None,
+                    // unused with ExecutionType.None, but exactly one spec is required
+                    TweenSpec(durationMillis = 0)
+                )
             )
         }
     }
