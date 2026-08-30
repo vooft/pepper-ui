@@ -16,7 +16,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import io.github.vooft.pepper.components.scenariolist.PepperScenarioNode
 import io.github.vooft.pepper.components.scenariolist.PepperTestScenarioTreeComponent
+import io.github.vooft.pepper.components.scenariolist.firstScenarioInTreeOrder
 import io.github.vooft.pepper.components.singlescenario.SingleScenarioScreen
 import io.github.vooft.pepper.components.utils.Panel
 import io.github.vooft.pepper.http.LoadablePepperSuite
@@ -46,7 +48,11 @@ fun SingleSuiteScreen(modifier: Modifier = Modifier, suite: LoadablePepperSuite,
                 if (state.scenarios.isEmpty()) {
                     Text("No scenarios found")
                 } else {
-                    var selectedScenario by remember { mutableStateOf(state.scenarios.first()) }
+                    // select the scenario the tree renders first, and reset the selection when the suite changes
+                    var selectedScenario by remember(state.suite) {
+                        val firstScenario = PepperScenarioNode.create(state.scenarios).firstScenarioInTreeOrder()
+                        mutableStateOf(firstScenario ?: state.scenarios.first())
+                    }
                     Row(modifier = Modifier.padding(4.dp)) {
                         Panel(
                             modifier = Modifier.weight(0.3f).fillMaxHeight(),

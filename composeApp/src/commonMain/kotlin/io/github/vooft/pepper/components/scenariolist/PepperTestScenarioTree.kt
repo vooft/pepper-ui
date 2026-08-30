@@ -66,6 +66,16 @@ fun TreeScope.PepperTreeNode(node: PepperScenarioNode, selectedScenarioId: Scena
     }
 }
 
+/**
+ * Returns the first scenario in the order the nodes are rendered by the tree, or null if there is none.
+ */
+fun List<PepperScenarioNode>.firstScenarioInTreeOrder(): PepperTestScenarioDto? = firstNotNullOfOrNull { node ->
+    when (node) {
+        is PepperScenarioNode.ScenarioNode -> node.scenario
+        is PepperScenarioNode.TagNode -> node.children.firstScenarioInTreeOrder()
+    }
+}
+
 sealed interface PepperScenarioNode {
 
     val name: String
