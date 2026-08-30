@@ -1,20 +1,24 @@
-
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    androidLibrary {
+        namespace = "io.github.vooft.pepper"
+        compileSdk = 36
+        minSdk = 23
+
+        // required so Compose Multiplatform resources from commonMain are packaged into the APK
+        androidResources.enable = true
+
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -32,8 +36,6 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.cio)
         }
         commonMain.dependencies {
@@ -78,34 +80,6 @@ kotlin {
             "-opt-in=kotlin.time.ExperimentalTime"
         )
     }
-}
-
-android {
-    namespace = "io.github.vooft"
-    compileSdk = 36
-
-    defaultConfig {
-        applicationId = "io.github.vooft"
-        minSdk = 23
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-dependencies {
-    debugImplementation(compose.uiTooling)
 }
 
 compose.desktop {
