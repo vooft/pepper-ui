@@ -81,8 +81,10 @@ fun ReportSuitesStatsScreen(
                         }
                     }
                 },
-                bar = { xIndex, barIndex, _ ->
-                    val suite = suites[xIndex]
+                // koalaplot passes the group index (always 0 here) as the first argument, so the x position
+                // must be taken from the entry itself
+                bar = { _, barIndex, entry ->
+                    val suite = suites[entry.x]
                     val category = Categories.fromIndex(barIndex)
 
                     TooltipBox(
