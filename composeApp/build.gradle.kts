@@ -33,7 +33,7 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+        val desktopMain = getByName("desktopMain")
 
         androidMain.dependencies {
             implementation(libs.ktor.client.cio)
@@ -45,7 +45,7 @@ kotlin {
             implementation(libs.compose.material.icons.extended)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
-            implementation(libs.compose.components.ui.tooling.preview)
+            implementation(libs.compose.ui.tooling.preview)
             implementation(libs.material.kolor)
             implementation(libs.koalaplot.core)
 
@@ -68,12 +68,11 @@ kotlin {
 
             implementation(libs.pepper.bdd.reports.api)
         }
-        val desktopTest by getting
+        val desktopTest = getByName("desktopTest")
         desktopTest.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(kotlin("test"))
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.uiTest)
+            implementation(libs.compose.ui.test)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

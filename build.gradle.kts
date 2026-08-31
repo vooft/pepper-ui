@@ -33,10 +33,12 @@ allprojects {
         basePath = rootDir.absolutePath
     }
 
+    val buildDirPath = layout.buildDirectory.get().asFile.path
+
     tasks.withType<LintTask> {
         source("build.gradle.kts", "settings.gradle.kts")
         exclude {
-            it.file.path.startsWith("$buildDir") && !it.file.path.endsWith("gradle.kts")
+            it.file.path.startsWith(buildDirPath) && !it.file.path.endsWith("gradle.kts")
         }
         dependsOn("formatKotlin")
     }
@@ -44,7 +46,7 @@ allprojects {
     tasks.withType<FormatTask> {
         source("build.gradle.kts", "settings.gradle.kts")
         exclude {
-            it.file.path.startsWith("$buildDir") && !it.file.path.endsWith("gradle.kts")
+            it.file.path.startsWith(buildDirPath) && !it.file.path.endsWith("gradle.kts")
         }
     }
 }
