@@ -26,7 +26,7 @@ androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycl
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version = "1.11.0" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.11.0" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.8.0" }
-material-kolor = { module = "com.materialkolor:material-kolor", version = "5.0.0" }
+material-kolor = { module = "com.materialkolor:material-kolor", version = "5.0.1" }
 koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version = "0.12.1" }
 
 pepper-bdd-reports-api = { module = "io.github.vooft:pepper-bdd-reports-api", version = "0.7.2" }
