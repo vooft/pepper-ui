@@ -11,11 +11,11 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-import org.koin.core.KoinApplication
 import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.koinConfiguration
 import org.koin.dsl.module
 
-fun KoinApplication.koinConfiguration() {
+val pepperKoinConfiguration = koinConfiguration {
     modules(
         module {
             single {
