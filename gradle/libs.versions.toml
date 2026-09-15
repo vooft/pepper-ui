@@ -29,7 +29,7 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version 
 material-kolor = { module = "com.materialkolor:material-kolor", version = "5.0.1" }
 koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version = "0.12.1" }
 
-pepper-bdd-reports-api = { module = "io.github.vooft:pepper-bdd-reports-api", version = "0.7.2" }
+pepper-bdd-reports-api = { module = "io.github.vooft:pepper-bdd-reports-api", version = "0.8.0" }
 compose-treeview-core = { module = "io.github.vooft:compose-treeview-core", version = "0.7.0" }
 
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.11.0" }
