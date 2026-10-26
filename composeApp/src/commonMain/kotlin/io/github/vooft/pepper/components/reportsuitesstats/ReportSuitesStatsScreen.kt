@@ -4,6 +4,7 @@ import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipAnchorPosition
@@ -32,6 +33,7 @@ import io.github.vooft.pepper.components.utils.PepperColor
 import io.github.vooft.pepper.http.LoadablePepperSuite
 import io.github.vooft.pepper.reports.api.PepperTestStatus
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportSuitesStatsScreen(
     modifier: Modifier = Modifier,
